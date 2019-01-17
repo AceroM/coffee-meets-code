@@ -2,6 +2,6 @@
 > The go to app to find the perfect hackathon partner!
 
 ## Contributors
-* Miguel Acero(AceroM)
+* Miguel Acero (AceroM)
 * Kaizen Castanos (kaizenc)
-* Leo Auyeung
+* Leo Au-Yeung (LeoAuyeung)
