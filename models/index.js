@@ -1,3 +1,5 @@
+const db = require('../config/database');
+
 //const Users = require('./Users');
 //const Hats = require('./Hats');
 
@@ -12,4 +14,4 @@
 //     .then(() => console.log("Users synced!"))
 //     .catch((err) => console.error(err));
 
-module.exports = { /*Insert exports here*/ };
+module.exports = { db };
