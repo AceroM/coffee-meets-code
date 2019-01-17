@@ -1,1 +1,1 @@
-web: node app.js
+web: cd frontend && PORT=process.env.PORT && npm start
