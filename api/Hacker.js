@@ -17,7 +17,7 @@ router.post('/login', async(req, res, next) => {
     }
   });
   if (!hacker){
-    res.status(404).send("Can't find user" + username);
+    res.status(404).send("Can't find user " + username);
   }else{
     let verified = saltHash.verifyPass(password, hacker.salt, hacker.passHash);
     if(!verified){
@@ -44,7 +44,7 @@ router.post('/register', async(req, res, next) => {
     res.status(201).send("user registered");
     return;
   }).catch((err) => {
-    res.status(404).send("Error found:" + err);
+    res.status(404).send("Error found: " + err);
     return;
   });
 
