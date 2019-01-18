@@ -1,4 +1,32 @@
+$colors: (
+    irenic: #07beb8,
+    serene: #3dccc7,
+    tranquil: #68d8d6,
+    calm: #9ceaef,
+    cool: #c4fff9,
+    ice: #ffffff,
+    
+    base: #454749
+);
+
+@function color($key: "calm") {
+    @return map-get($colors, $key);
+}
+
 .login-form {
+    font-family: "Roboto";
+    background: linear-gradient(to bottom, color("tranquil"), color("ice"));
+    width: 100%;
+    height: 100vh;
     display: flex;
+    flex-flow: column wrap;
+    align-content: center;
     justify-content: center;
+
+    .card {
+    }
+}
+
+#tabs {
+    left: 40%;
 }
