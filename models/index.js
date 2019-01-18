@@ -1,15 +1,6 @@
-//const Users = require('./Users');
-//const Hats = require('./Hats');
+const db = require('./db');
+const Hacker = require('./Hacker');
 
-//Users.hasMany(Hats, {foreignKey: 'userId'});
-//Hats.belongsTo(Users, {foreignKey: 'userId'});
-
-// Hats.sync()
-//     .then(() => console.log("Hats synced!"))
-//     .catch((err) => console.error(err));
-
-// Users.sync()
-//     .then(() => console.log("Users synced!"))
-//     .catch((err) => console.error(err));
-
-module.exports = { /*Insert exports here*/ };
+module.exports = {
+  db, Hacker
+}
