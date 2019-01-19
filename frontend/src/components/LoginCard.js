@@ -17,17 +17,30 @@ const styles = {
 };
 
 class LoginCard extends React.Component {
-    state = {
-        username: "",
-        password: ""
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: ""
+        }
     }
 
+    /**
+     * Sends a post request to login
+     * @memberof LoginCard
+     */
     handleLogin = (e) => {
+        e.preventDefault();
         axios.post("api/hackers/login", {
             username: this.state.username,
             password: this.state.password
         })
-        .then(res => console.log(res))
+        .then(res => {
+            console.log("res")
+            if (res.status === 201) {
+                this.props.isLoggedIn();
+            }
+        })
     }
 
     handleChange = (e) => {
