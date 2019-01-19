@@ -40,7 +40,7 @@ function saltHashPassword(userpassword) {
 }
 
 var verifyPass = function(password, salt, checkPass){
-    var comparePass = sha512(password, salt);
+    var comparePass = sha512(password, salt).passwordHash;
     return comparePass === checkPass;
 }
 
