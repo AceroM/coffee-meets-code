@@ -14,13 +14,16 @@ class Home extends Component {
     }
     
     render() {
-        const { userName } = this.props;
+        const { username } = this.props;
         return (
             <div>
-                Welcome {userName}
+                Welcome {username}
             </div>
         );
     }
 }
+
+// Home.propTypes = {
+// }
 
 export default Home;
