@@ -126,19 +126,30 @@ router.post('/swipedLeft', async(req, res, next) => {
       username: user
     }
   }).then(hacker => {
-    let arr = hacker.likesMe;
-    let arr2 = hacker.used;
-    arr2.push(swipedOn)
-    if(hacker.likesMe.includes(swipedOn)){
-      arr.splice(hacker.likesMe.indexOf(swipedOn), 1);
-    }else{
+    Hacker.findOne({
+      where: {
+        username: swipedOn
+      }
+    }).then(hacker2 => {
+      let likesMe1 = hacker.likesMe;
+      let used1 = hacker.used;
+      let used2 = hacker2.used;
+      used1.push(swipedOn);
+      if(likesMe1.includes(swipedOn)){
+        likesMe1.splice(likesMe1.indexOf(swipedOn), 1);
+        used2.push(user);
+      }
       Hacker.update(
-        {likesMe: arr, used: arr2},
+        {likesMe: likesMe1, used: used1},
         {where: {username: user}}
+      ).catch(err => console.log(err));
+      Hacker.update(
+        {used: used2},
+        {where: {username: swipedOn}}
       ).catch(err => console.log(err));
       res.status(201).send("Succeeded");
       return; 
-    }
+    });
   }).catch(err => {
     res.status(404).send("Error found, check console");
     console.log(err);
