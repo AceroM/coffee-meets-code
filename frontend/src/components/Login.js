@@ -8,6 +8,7 @@ import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Book from '@material-ui/icons/Book'
 import '../styles/Login.scss';
 
+
 class Login extends Component {
     render() {
         return (
@@ -26,12 +27,14 @@ class Login extends Component {
                             <Tab
                                 label="login"
                                 icon={<Book />}
+                                value="login"
                                 component={Link}
                                 to={"/"}
                             />
                             <Tab 
                                 label="register"
                                 icon={<PersonPinIcon />}
+                                value="register"
                                 component={Link}
                                 to={"/register"}
                             />

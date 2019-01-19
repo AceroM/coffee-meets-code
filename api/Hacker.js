@@ -47,7 +47,6 @@ router.post('/register', async(req, res, next) => {
     res.status(404).send("Error found: " + err);
     return;
   });
-
 })
 
 router.get('/populate', async (req, res, next) => {
