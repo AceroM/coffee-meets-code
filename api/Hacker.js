@@ -23,7 +23,7 @@ router.post('/login', async(req, res, next) => {
     if(!verified){
       res.status(404).send("Password Incorrect");
     }else{
-      res.status(201).send("Login successful");
+      res.status(201).send(hacker);
     }
   }
 })
@@ -49,19 +49,25 @@ router.post('/register', async(req, res, next) => {
   });
 })
 
-router.get('/populate', async (req, res, next) => {
-  Hacker.bulkCreate([
-    {
-      username: 'potato',
-      passwordHash: 'lkjqqereqopiu',
-      salt: 'zpoiqwuepriu',
-      firstName: 'Miguel',
-      lastName: 'Acero',
-      email: 'potato@gmail.com',
-    },
-  ])
-  .then(res.status(201).send("populate complete"));
-});
+router.post('/swipedRight', async(req, res, next) => {
+  const {user, passHash, swipedOn} = req.body;
+  /**
+   * Confirm this is allowed
+   * Then check if swipedOn is in my likesMe
+   * If so, move swipedOn into used and move my name into swipedOn's matched
+   * Else, put my name in my swipedOn's likesMe
+   */
+})
 
+router.post('/swipedLeft', async(req, res, next) => {
+  const {user, passHash, swipedOn} = req.body;
+  /**
+   * Confirm this is allowed
+   * Move swipedOn's name into my used (remove from likesMe)
+   * Then check if my name is in swipedOn's likesMe
+   * If so, move swipedOn into used and move my name into swipedOn's matched
+   * Else, put my name in my swipedOn's likesMe
+   */
+})
 
 // router.post('/dogs', (req, res, next) =>{})
