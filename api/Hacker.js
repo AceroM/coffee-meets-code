@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Hacker } = require('../models')
+const { db, Hacker } = require('../models')
 const saltHash = require('./saltHash');
 
 module.exports = router;
@@ -57,7 +57,7 @@ router.post('/swipedRight', async(req, res, next) => {
    * If so, move swipedOn into my used and move my name into swipedOn's matched
    * 
    * Else, check if my name is in swipedOn's used
-   * If so, move swipedOn's name into my used
+   * If so, add swipedOn's name into my used
    * Else, move my name into swipedOn's likesMe
    */
   await Hacker.findOne({
@@ -73,18 +73,35 @@ router.post('/swipedRight', async(req, res, next) => {
       /**
        * This is where all of the logic actually is
        */
-      if(hacker.likesMe.includes(swipedOn)){
-        hacker.used.push(swipedOn);
-        hacker2.matched.push(user);
-        hacker.save().then(() => {});
-        hacker2.save().then(() => {});
+      let likesMe1 = hacker.likesMe;
+      let used1 = hacker.used;
+      let likesMe2 = hacker2.likesMe;
+      let used2 = hacker2.used;
+      let matched2 = hacker2.matched;
+      if(likesMe1.includes(swipedOn)){
+        used1.push(swipedOn);
+        matched2.push(user);
+        likesMe1.splice(likesMe1.indexOf(swipedOn), 1);
       }else{
-        if(hacker2.used.includes(user)){
-          //
+        if(used2.includes(user)){
+          used1.push(swipedOn);
         }else{
-          //
+          likesMe2.push(user);
         }
       }
+      Hacker.update(
+        {likesMe: likesMe1, used: used1},
+        {where: {username: user}}
+      )
+      .then(() => {
+        Hacker.update(
+          {likesMe: likesMe2, used: used2, matched: matched2},
+          {where: {username: swipedOn}}
+        ).catch(err => console.log(err));
+        res.status(201).send("Succeded");
+      })
+      .catch(err => console.log(err));
+      
 
     }).catch(err => {
       res.status(404).send("Error found, check console");
@@ -109,28 +126,19 @@ router.post('/swipedLeft', async(req, res, next) => {
       username: user
     }
   }).then(hacker => {
-    Hacker.findOne({
-      where: {
-        username: swipedOn
-      }
-    }).then(hacker2 => {
-      /**
-       * This is where all of the logic actually is
-       */
-      if(hacker.likesMe.includes(swipedOn)){
-        //
-      }else{
-        if(hacker2.used.includes(user)){
-          //
-        }else{
-          //
-        }
-      }
-
-    }).catch(err => {
-      res.status(404).send("Error found, check console");
-      console.log(err);
-    })
+    let arr = hacker.likesMe;
+    let arr2 = hacker.used;
+    arr2.push(swipedOn)
+    if(hacker.likesMe.includes(swipedOn)){
+      arr.splice(hacker.likesMe.indexOf(swipedOn), 1);
+    }else{
+      Hacker.update(
+        {likesMe: arr, used: arr2},
+        {where: {username: user}}
+      ).catch(err => console.log(err));
+      res.status(201).send("Succeeded");
+      return; 
+    }
   }).catch(err => {
     res.status(404).send("Error found, check console");
     console.log(err);
@@ -142,7 +150,7 @@ router.get('/populate', async(req, res, next) => {
   let potato = saltHash.saltHashPassword("password2");
   const salt2 = potato.salt;
   const passHash2 = potato.passHash;
-  let hack_promise = await Hacker.bulkCreate(
+  await Hacker.bulkCreate(
     [
       {
         username: "kai",
@@ -168,6 +176,13 @@ router.get('/populate', async(req, res, next) => {
   }).catch((err) => {
     res.status(404).send("Error found, check console");
     console.log(err);
+    return;
+  });
+})
+
+router.get('/drop', (req, res, next) => {
+  db.sync({force:true}).then(() => {
+    res.send("Table Dropped");
     return;
   });
 })

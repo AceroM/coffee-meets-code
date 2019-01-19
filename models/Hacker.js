@@ -62,12 +62,15 @@ const Hacker = db.define("hacker", {
   },
   likesMe: {
     type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: [],
   },
   matched: {
     type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: [],
   },
   used: {
     type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: [],
   }
 });
 
