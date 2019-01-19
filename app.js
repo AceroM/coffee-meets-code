@@ -8,7 +8,6 @@ const { db } = require("./models");
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded());
-
 app.use("/api", require("./api"));
 
 db.authenticate()
@@ -21,6 +20,6 @@ db.authenticate()
 
 db.sync().then(() => console.log("tables created!"));
 
-app.listen(3000, () => {
-    console.log("App is listening on port 3000");
+app.listen(5000, () => {
+    console.log("App is listening on port 5000");
 });
