@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import axios from 'axios';
 
 const styles = {
     card: {
@@ -17,12 +18,21 @@ const styles = {
 
 class LoginCard extends React.Component {
     state = {
-        user: "",
+        username: "",
         password: ""
     }
 
     handleLogin = (e) => {
+        axios.post("http://localhost:3000/api/login", {
+            username: this.state.username,
+            password: this.state.password
+        })
+        .then(res => console.log(res))
+    }
 
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+        console.log(this.state)
     }
 
     render() {
@@ -33,16 +43,16 @@ class LoginCard extends React.Component {
                 </Typography>
                 <FormControl>
                     <InputLabel htmlFor="username"> Username </InputLabel>
-                    <Input id="username" value={this.state.user}/>
+                    <Input name="username" value={this.state.user} onChange={this.handleChange}/>
                 </FormControl>
                 <br/>
                 <FormControl>
                     <InputLabel htmlFor="username"> Password </InputLabel>
-                    <Input id="username" value={this.state.password}/>
+                    <Input name="password" value={this.state.password} onChange={this.handleChange}/>
                 </FormControl>
                 <br/>
                 <br/>
-                <Button size="small">
+                <Button onClick={this.handleLogin} size="small">
                     Login
                 </Button>
             </div>
