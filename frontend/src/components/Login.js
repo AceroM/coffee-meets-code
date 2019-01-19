@@ -26,12 +26,14 @@ class Login extends Component {
                             <Tab
                                 label="login"
                                 icon={<Book />}
+                                value="login"
                                 component={Link}
                                 to={"/"}
                             />
                             <Tab 
                                 label="register"
                                 icon={<PersonPinIcon />}
+                                value="register"
                                 component={Link}
                                 to={"/register"}
                             />
