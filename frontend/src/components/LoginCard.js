@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import axios from 'axios';
+import InfoProvider, { Consumer }  from './InfoProvider';
 
 const styles = {
     card: {
@@ -22,14 +22,6 @@ class LoginCard extends React.Component {
         password: ""
     }
 
-    handleLogin = (e) => {
-        axios.post("api/hackers/login", {
-            username: this.state.username,
-            password: this.state.password
-        })
-        .then(res => console.log(res))
-    }
-
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
         console.log(this.state)
@@ -38,23 +30,35 @@ class LoginCard extends React.Component {
     render() {
         return (
             <div className="card">
+                <InfoProvider>
                 <Typography component="p">
                     Please Enter your login credentials.
                 </Typography>
-                <FormControl>
-                    <InputLabel htmlFor="username"> Username </InputLabel>
-                    <Input type="text" name="username" value={this.state.user} onChange={this.handleChange}/>
-                </FormControl>
+                <Consumer>
+                    {(context) => (
+                        <div>
+                        <FormControl>
+                            <InputLabel htmlFor="username"> Username </InputLabel>
+                            <Input type="text" name="username" value={context.state.username} onChange={context.handleChange}/>
+                        </FormControl>
+                        <br/>
+                        <FormControl>
+                            <InputLabel htmlFor="username"> Password </InputLabel>
+                            <Input type="password" name="password" value={context.state.password} onChange={context.handleChange}/>
+                        </FormControl>
+                        </div>
+                    )}
+                </Consumer>
                 <br/>
-                <FormControl>
-                    <InputLabel htmlFor="username"> Password </InputLabel>
-                    <Input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
-                </FormControl>
                 <br/>
-                <br/>
-                <Button onClick={this.handleLogin} size="small">
-                    Login
-                </Button>
+                    <Consumer>
+                        {(context) => (
+                            <Button onClick={context.isLoggedIn} size="small">
+                                Login
+                            </Button>
+                        )}
+                    </Consumer>
+                </InfoProvider>
             </div>
         );
     }
