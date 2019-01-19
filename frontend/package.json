@@ -1,5 +1,6 @@
 {
   "name": "coffee-meets-code",
+  "proxy": "http://localhost:3000/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,6 +27,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "proxy": "http://localhost:3000/"
+  ]
 }
