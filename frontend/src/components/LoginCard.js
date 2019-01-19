@@ -23,11 +23,7 @@ class LoginCard extends React.Component {
     }
 
     handleLogin = (e) => {
-<<<<<<< HEAD
-        axios.post("/api/hackers/login", {
-=======
         axios.post("api/hackers/login", {
->>>>>>> origin/miguel
             username: this.state.username,
             password: this.state.password
         })
