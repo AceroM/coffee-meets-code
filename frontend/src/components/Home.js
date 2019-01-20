@@ -24,7 +24,11 @@ class Home extends Component {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default connect(mapState)(Home);
+=======
+export default Home;
+>>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
 =======
 export default Home;
 >>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
