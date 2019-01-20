@@ -44,6 +44,4 @@ var verifyPass = function(password, salt, checkPass){
     return comparePass === checkPass;
 }
 
-saltHashPassword('MYPASSWORD');
-saltHashPassword('MYPASSWORD');
 module.exports = {saltHashPassword, verifyPass};

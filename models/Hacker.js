@@ -51,14 +51,26 @@ const Hacker = db.define("hacker", {
     type: Sequelize.STRING,
     defaultValue: "https://www.argentum.org/wp-content/uploads/2018/12/blank-profile-picture-973460_6404.png" 
   },
-  hackathons: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-  },
   githubUrl: {
     type: Sequelize.STRING,
     validate:{
       isUrl: true,
     }
+  },
+  hackathons: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+  },
+  likesMe: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: [],
+  },
+  matched: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: [],
+  },
+  used: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: [],
   }
 });
 
