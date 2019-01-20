@@ -30,7 +30,7 @@ export const auth = (username, password) => async dispatch => {
         res = await axios.post('api/hackers/login', {username, password});
     } catch(authError) {
         console.error(authError)
-        return dispatch(getUser({ isLoggedIn: false }))
+        return dispatch(getUser({ data: { isLoggedIn: false, username: "" }}))
     }
 
     try {
