@@ -9,6 +9,12 @@ router.get('/', async (req, res, next) => {
   res.send(hackers);
 })
 
+/**
+ * Login Post
+ * Success Response: 
+ * { data: { isLoggedIn: true, username, hackathons } }
+ */
+
 router.post('/login', async(req, res, next) => {
   const { username, password } = req.body;
   const hacker = await Hacker.findOne({
@@ -23,7 +29,13 @@ router.post('/login', async(req, res, next) => {
     if(!verified){
       res.status(404).send("Password Incorrect");
     }else{
-      res.status(201).send("Login successful");
+      res.status(201).send({
+        data: {
+          isLoggedIn: true,
+          username: "img98",
+          hackathons: "HackNY"
+        }
+      });
     }
   }
 })

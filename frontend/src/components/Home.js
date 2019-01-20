@@ -1,26 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 
-class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+const Home = props => {
+    const { username } = props;
+    return (
+        <div>
+            <h2> Welcome to CoffeeMeetsCode, { username }</h2>
+        </div>
+    );
+};
 
-        }
-    }
-
-    componentDidMount() {
-        
-    }
-    
-    render() {
-        const { userName } = this.props;
-        return (
-            <div>
-                Welcome {userName}
-            </div>
-        );
+const mapState = state => {
+    return {
+        username: state.user.name
     }
 }
 
-export default Home;
+Home.propTypes = {
+    username:  PropTypes.string
+};
+
+export default connect(mapState)(Home);
