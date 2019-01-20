@@ -30,7 +30,6 @@ class LoginCard extends React.Component {
      * @memberof LoginCard
      */
     handleLogin = (e) => {
-        e.preventDefault();
         axios.post("api/hackers/login", {
             username: this.state.username,
             password: this.state.password
@@ -56,7 +55,7 @@ class LoginCard extends React.Component {
                 </Typography>
                 <FormControl>
                     <InputLabel htmlFor="username"> Username </InputLabel>
-                    <Input name="username" value={this.state.user} onChange={this.handleChange}/>
+                    <Input type="text" name="username" value={this.state.user} onChange={this.handleChange}/>
                 </FormControl>
                 <br/>
                 <FormControl>
