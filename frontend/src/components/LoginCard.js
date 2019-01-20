@@ -19,6 +19,7 @@ const styles = {
 class LoginCard extends React.Component {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     constructor(props) {
         super(props);
         this.state = {
@@ -34,12 +35,17 @@ class LoginCard extends React.Component {
 =======
 =======
 >>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
+=======
+>>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
     state = {
         username: "",
         password: ""
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
+=======
 >>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
 =======
 >>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
@@ -50,12 +56,16 @@ class LoginCard extends React.Component {
         })
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         .then(res => {
             console.log("res")
             if (res.status === 201) {
                 this.props.isLoggedIn();
             }
         })
+=======
+        .then(res => console.log(res))
+>>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
 =======
         .then(res => console.log(res))
 >>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
