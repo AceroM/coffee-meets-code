@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
-import LoginCard from './LoginCard'
+import { withRouter, Route, Link, Switch } from "react-router-dom";
 import RegisterCard from './RegisterCard'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Book from '@material-ui/icons/Book'
-import Home from './Home';
+import { connect } from 'react-redux'
 import '../styles/Login.scss';
+import LoginForm from './AuthForm'
 
 class Login extends Component {
     constructor(props) {
@@ -25,55 +25,59 @@ class Login extends Component {
     }
 
     render() {
+        const { isLoggedIn, username } = this.props;
         return (
-            <form className="login-form">
-                <Router>
-                    { this.state.authenticated ?
-                        <Switch>
-                            <Route 
-                                exact path="/" 
-                                render={(props) => <Home {...props} username={this.state.username}/>}
-                            />
-                        </Switch>
-                        : <div className="router">
-                            <h1>Login / Register</h1>
-                            <Tabs
-                                id="tabs"
-                                // value={this.state.value}
-                                // onChange={this.handleChange}
-                                variant="fullWidth"
-                                indicatorColor="primary"
-                                textColor="primary"
-                            >
-                                <Tab
-                                    label="login"
-                                    icon={<Book />}
-                                    value="login"
-                                    component={Link}
-                                    to={"/"}
-                                />
-                                <Tab 
-                                    label="register"
-                                    icon={<PersonPinIcon />}
-                                    value="register"
-                                    component={Link}
-                                    to={"/register"}
-                                />
-                            </Tabs>
-                            <Switch>
-                                <Route 
-                                    exact path="/" 
-                                    render={(props) => <LoginCard {...props} isLoggedIn={this.isLoggedIn}/>}
-                                />
-                                <Route path="/register" component={RegisterCard}/>
-                            </Switch>
-                        </div>
-                    }
-                    
-                </Router>
-            </form>
+            <div className="login-form">
+                {/* { JSON.stringify(this.props) } */}
+                { isLoggedIn ? (
+                    <h1> Welcome { username } </h1>
+                ) : (
+                <div>
+                <h1>Login / Register</h1>
+                <Tabs
+                    id="tabs"
+                    // value={this.state.value}
+                    // onChange={this.handleChange}
+                    variant="fullWidth"
+                    indicatorColor="primary"
+                    textColor="primary"
+                >
+                    <Tab
+                        label="login"
+                        icon={<Book />}
+                        value="login"
+                        component={Link}
+                        to={"/"}
+                    />
+                    <Tab 
+                        label="register"
+                        icon={<PersonPinIcon />}
+                        value="register"
+                        component={Link}
+                        to={"/register"}
+                    />
+                </Tabs>
+                <Switch>
+                    <Route exact path="/" component={LoginForm}/>
+                    <Route path="/register" component={RegisterCard}/>
+                </Switch>
+                </div>
+                )}
+            </div>
         );
     }
 }
 
-export default Login;
+/**
+ * ContaiNER
+ */
+
+const mapState = state => {
+    console.log(state)
+    return {
+        isLoggedIn: state.user.data.isLoggedIn,
+        username: state.user.data.username
+    }
+}
+
+export default withRouter(connect(mapState)(Login))

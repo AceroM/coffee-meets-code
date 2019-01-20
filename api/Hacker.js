@@ -9,6 +9,12 @@ router.get('/', async (req, res, next) => {
   res.send(hackers);
 })
 
+/**
+ * Login Post
+ * Success Response: 
+ * { data: { isLoggedIn: true, username, hackathons } }
+ */
+
 router.post('/login', async(req, res, next) => {
   const { username, password } = req.body;
   const hacker = await Hacker.findOne({
