@@ -20,10 +20,10 @@ const styles = {
 
 class AuthForm extends React.Component {
     render() {
-        const { username, handleLogin, error } = this.props;
+        const { handleLogin, error } = this.props;
         return (
             <div className="card">
-                <form onSubmit={handleLogin} username={username}>
+                <form onSubmit={handleLogin}>
                     <Typography component="p">
                         Please Enter your login credentials.
                     </Typography>
@@ -41,6 +41,7 @@ class AuthForm extends React.Component {
                     <Button type="submit" size="small">
                         Login
                     </Button>
+                    { error && error.response && <div> {error.response} </div>}
                 </form>
             </div>
         );
@@ -51,6 +52,12 @@ AuthForm.propTypes = {
     username: PropTypes.string,
     handleLogin: PropTypes.func,
     error: PropTypes.object
+}
+
+const mapState = state => {
+    return {
+        error: state.user.data.error
+    }
 }
 
 const mapDispatch = dispatch => {
@@ -65,4 +72,4 @@ const mapDispatch = dispatch => {
     }
 }
 
-export default connect(null, mapDispatch)(withStyles(styles)(AuthForm));
+export default connect(mapState, mapDispatch)(withStyles(styles)(AuthForm));

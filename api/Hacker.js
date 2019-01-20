@@ -29,7 +29,10 @@ router.post('/login', async(req, res, next) => {
     if(!verified){
       res.status(404).send("Password Incorrect");
     }else{
-      res.status(201).send(hacker);
+      res.status(201).send({data: {
+        isLoggedIn: true,
+        username: "Miguel"
+      }});
     }
   }
 })
