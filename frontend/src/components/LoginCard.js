@@ -17,6 +17,7 @@ const styles = {
 };
 
 class LoginCard extends React.Component {
+<<<<<<< HEAD
     constructor(props) {
         super(props);
         this.state = {
@@ -29,17 +30,28 @@ class LoginCard extends React.Component {
      * Sends a post request to login
      * @memberof LoginCard
      */
+=======
+    state = {
+        username: "",
+        password: ""
+    }
+
+>>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
     handleLogin = (e) => {
         axios.post("api/hackers/login", {
             username: this.state.username,
             password: this.state.password
         })
+<<<<<<< HEAD
         .then(res => {
             console.log("res")
             if (res.status === 201) {
                 this.props.isLoggedIn();
             }
         })
+=======
+        .then(res => console.log(res))
+>>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
     }
 
     handleChange = (e) => {

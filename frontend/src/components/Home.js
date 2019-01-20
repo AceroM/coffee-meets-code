@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
 
-const Home = props => {
-    const { username } = props;
-    return (
-        <div>
-            <h2> Welcome to CoffeeMeetsCode, { username }</h2>
-        </div>
-    );
-};
+class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
 
-const mapState = state => {
-    return {
-        username: state.user.name
+        }
+    }
+
+    componentDidMount() {
+        
+    }
+    
+    render() {
+        const { userName } = this.props;
+        return (
+            <div>
+                Welcome {userName}
+            </div>
+        );
     }
 }
 
-Home.propTypes = {
-    username:  PropTypes.string
-};
-
+<<<<<<< HEAD
 export default connect(mapState)(Home);
+=======
+export default Home;
+>>>>>>> parent of 7fda2d3... idk how but i got redux to work LOL
