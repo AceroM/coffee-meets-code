@@ -10,6 +10,20 @@ import '../styles/Login.scss';
 import LoginForm from './AuthForm'
 
 class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "img98",
+            authenticated: false
+        }
+    }
+
+    isLoggedIn = () => {
+        this.setState({
+            authenticated: true,
+        });
+    }
+
     render() {
         const { isLoggedIn, username } = this.props;
         return (
