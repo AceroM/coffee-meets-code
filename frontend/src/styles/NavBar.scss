@@ -1,0 +1,39 @@
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    background-color: rgba(255,255,255,0.9);
+}
+
+#logo {
+    padding: .4em 0 0 1em;
+    float: left;
+    width: 10%;
+    height: 10%;
+    display: inline-block;
+}
+
+.mainNav {
+    display: flex;
+    float: right;
+}
+
+.nav-items {
+    display: flex;
+    margin-right: 10vw;
+    justify-content: space-between;
+    color: #555;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
