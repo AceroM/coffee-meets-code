@@ -41,7 +41,6 @@ export const auth = (username, password) => async dispatch => {
             }
         }))
     }
-
     try {
         dispatch(getUser(res.data))
     } catch(err) {
