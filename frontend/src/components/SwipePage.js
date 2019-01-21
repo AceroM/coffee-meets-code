@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Cards, { Card } from 'react-swipe-card'
+import { Card, CardWrapper } from 'react-swipeable-cards';
 
 class SwipePage extends Component {
     constructor(props){
@@ -13,27 +13,42 @@ class SwipePage extends Component {
     componentDidMount(){
         axios.get('api/hackers/allExcept/' + this.props.data.username)
             .then(response => {
-                let potato = response.data.map(x => x.username);
+                let temp = response.data.map(x => x.username);
                 this.setState({
-                    other_hackers: response,
-                    other_hackers_user: potato
+                    other_hackers: response.data,
+                    other_hackers_user: temp
                 });
-                console.log(this.state.other_hackers_user);
             });
     }
-    
+    onSwipeLeft(data){
+        axios.post('api/hackers/swipedLeft', {
+            user: this.props.data.username, 
+            swipedOn: data.username
+        });
+    }
+    onSwipeRight(data){
+        axios.post('api/hackers/swipedRight', {
+            user: this.props.data.username, 
+            swipedOn: data.username
+        });
+    }
     render() {
-        let lmfao = this.state.other_hackers_user.map(item => 
-            <Card >
-                <h2>{item}</h2>
-            </Card>
-        );
+        let cards = this.state.other_hackers.map(item => {            
+            return(
+                <Card key={item.username} 
+                    data={item} 
+                    onSwipeLeft={this.onSwipeLeft.bind(this)}
+                    onSwipeRight={this.onSwipeRight.bind(this)}>
+                    Name: {item.firstName} {item.lastName}
+                </Card>
+            );           
+        });
         return (
             <div>
                 HERE R UR POSSIBLE SWIPEZ <br/>
-                <Cards>
-                    {lmfao}
-                </Cards>
+                <CardWrapper>
+                    {cards}
+                </CardWrapper>                    
             </div>
         );
     }

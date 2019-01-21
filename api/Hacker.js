@@ -212,26 +212,39 @@ router.get('/matched/:username', async (req, res, next) => {
 
 router.get('/populate', async(req, res, next) => {
   const { salt, passHash } = saltHash.saltHashPassword("password");
-  let potato = saltHash.saltHashPassword("password2");
-  const salt2 = potato.salt;
-  const passHash2 = potato.passHash;
   await Hacker.bulkCreate(
     [
       {
-        username: "kai",
+        username: "mark",
         passHash: passHash,
         salt: salt,
-        firstName: "Kaizen",
-        lastName: "Castanos",
+        firstName: "Mark",
+        lastName: "Finch",
         email: "fake@mail.com",
       },
       {
-        username: "bell",
-        passHash: passHash2,
-        salt: salt2,
-        firstName: "Belle",
-        lastName: "Clemente",
+        username: "john",
+        passHash: passHash,
+        salt: salt,
+        firstName: "John",
+        lastName: "Hopkin",
         email: "fake2@mail.com",        
+      },
+      {
+        username: "jenny",
+        passHash: passHash,
+        salt: salt,
+        firstName: "Jenny",
+        lastName: "Hunter",
+        email: "fake3@mail.com",        
+      },
+      {
+        username: "lucian",
+        passHash: passHash,
+        salt: salt,
+        firstName: "Lucian",
+        lastName: "Senna",
+        email: "fake4@mail.com",        
       }
     ]
     )
