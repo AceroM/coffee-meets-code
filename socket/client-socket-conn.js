@@ -1,4 +1,5 @@
 $(function(){
+  //Basically implement all this code in a component
   var socket = io(); 
   var my_id = 3; //Taken from the id
   socket.emit('user_connect', my_id); //This isn't important, but I don't wanna remove it
