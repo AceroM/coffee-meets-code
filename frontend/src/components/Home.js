@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
 
 const Home = props => {
     const { username } = props;
@@ -11,14 +10,4 @@ const Home = props => {
     );
 };
 
-const mapState = state => {
-    return {
-        username: state.user.name
-    }
-}
-
-Home.propTypes = {
-    username:  PropTypes.string
-};
-
-export default connect(mapState)(Home);
+export default Home

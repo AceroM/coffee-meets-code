@@ -8,6 +8,7 @@ import Book from '@material-ui/icons/Book'
 import { connect } from 'react-redux'
 import '../styles/Login.scss';
 import LoginForm from './AuthForm'
+import Home from './Home'
 
 class Login extends Component {
     render() {
@@ -16,7 +17,7 @@ class Login extends Component {
             <div className="login-form">
                 {/* { JSON.stringify(this.props) } */}
                 { isLoggedIn ? (
-                    <h1> Welcome { username } </h1>
+                    <Home username={username}/>
                 ) : (
                 <div>
                 <h1>Login / Register</h1>

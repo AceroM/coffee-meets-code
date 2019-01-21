@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import PropTypes from 'prop-types';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import { auth, getUser } from '../store'
+import { auth } from '../store'
 
 const styles = {
     card: {
