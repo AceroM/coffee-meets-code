@@ -32,7 +32,12 @@ class SwipePage extends Component {
             swipedOn: data.username
         });
     }
-    render() {
+    getEndCard() {
+        return(
+          <div>You're out of hackers!</div>
+        );
+      }
+    render() {        
         let cards = this.state.other_hackers.map(item => {            
             return(
                 <Card key={item.username} 
@@ -43,10 +48,11 @@ class SwipePage extends Component {
                 </Card>
             );           
         });
-        return (
+        
+        return (            
             <div>
                 HERE R UR POSSIBLE SWIPEZ <br/>
-                <CardWrapper>
+                <CardWrapper addEndCard={this.getEndCard.bind(this)}>
                     {cards}
                 </CardWrapper>                    
             </div>

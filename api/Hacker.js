@@ -4,20 +4,45 @@ const saltHash = require('./saltHash');
 
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op
-
 module.exports = router;
 
+/**
+ * Get /
+ * Returns a list of hacker objects
+ * @params
+ *    None
+ * @return
+ *    A list of hacker objects
+ */
 router.get('/', async (req, res, next) => {
   const hackers = await Hacker.findAll();
   res.send(hackers);
 })
 
 /**
- * Login Post
- * Success Response: 
- * { data: { isLoggedIn: true, username, hackathons } }
+ * Post /login
+ * Verifies the login information of a user
+ * @params
+ *    A json of the form {
+ *      username: string,
+ *      password: string
+ *    }
+ * @return
+ *    A json of the form {
+ *      data: {
+ *        isLoggedIn: boolean,
+ *        username: string,
+ *        firstName: string,
+ *        lastName: string,
+ *        email: string,
+ *        imageUrl: string,
+ *        githubUrl: string,
+ *        hackathons: array,
+ *        matched: array,
+ *        used: array
+ *      }
+ *    }
  */
-
 router.post('/login', async(req, res, next) => {
   const { username, password } = req.body;
   const hacker = await Hacker.findOne({
@@ -50,6 +75,22 @@ router.post('/login', async(req, res, next) => {
   }
 })
 
+/**
+ * Post /register
+ * Registers a new user
+ * @params
+ *    A json of the form {
+ *      username: string,
+ *      password: string,
+ *      firstName: string,
+ *      lastName: string, 
+ *      email: string,  
+ *      githubUrl: string
+ *    }
+ * @return
+ *    Status 201 and a message "user registered" if successful
+ *    Status 404 and a message "error found" if unsuccessful
+ */
 router.post('/register', async(req, res, next) => {
   const { username, password, firstName, lastName, email, githubUrl } = req.body;
   const { salt, passHash } = saltHash.saltHashPassword(password);
@@ -71,6 +112,20 @@ router.post('/register', async(req, res, next) => {
   });
 })
 
+
+/**
+ * Post /swipedRight
+ * Simulates a swipeRight and modifies the database accordingly
+ * Logic is written in comments in the function itself
+ * @params
+ *    A json of the form {
+ *      user: string,
+ *      swipedOn: string,
+ *    }
+ * @return
+ *    Status 201 and a message "Succed" if successful
+ *    Status 404 and a message "Error found" if unsuccessful
+ */
 router.post('/swipedRight', async(req, res, next) => {
   const {user, swipedOn} = req.body;
   /**
@@ -137,6 +192,20 @@ router.post('/swipedRight', async(req, res, next) => {
   
 })
 
+
+/**
+ * Post /swipedLeft
+ * Simulates a swipeLeft and modifies the database accordingly
+ * Logic is written in comments in the function itself
+ * @params
+ *    A json of the form {
+ *      user: string,
+ *      swipedOn: string,
+ *    }
+ * @return
+ *    Status 201 and a message "Succeeded" if successful
+ *    Status 404 and a message "Error found" if unsuccessful
+ */
 router.post('/swipedLeft', async(req, res, next) => {
   const {user, swipedOn} = req.body;
   /**
@@ -180,17 +249,43 @@ router.post('/swipedLeft', async(req, res, next) => {
   });
 })
 
+/**
+ * Get /allExcept/:username
+ * Returns a list of hackers who aren't the specified user
+ * and haven't already been swiped on by the user
+ * @params
+ *    A string username
+ * @return
+ *    Status 201 and an array of hackers if successful
+ */
 router.get('/allExcept/:username', async (req, res, next) => {
-  const hackers = await Hacker.findAll({
+  await Hacker.findAll({
     where: {
       username: {
         [Op.not]: req.params.username
       }
     }
+  }).then(hackers => {
+    Hacker.findOne({
+      where: {
+        username: req.params.username
+      }
+    }).then(huh => {
+      let result = hackers.filter(x => !huh.used.includes(x.username));
+      res.status(201).send(result);    
+    });    
   });
-  res.send(hackers);
 })
 
+/**
+ * Get /matched/:username
+ * Returns a list of new matches for the user
+ * Updates the database to move those items to the used array
+ * @params
+ *    A string username
+ * @return
+ *    Status 201 and an array of usernames if successful
+ */
 router.get('/matched/:username', async (req, res, next) => {
   const hackers = await Hacker.findOne({
     where: {
@@ -205,11 +300,15 @@ router.get('/matched/:username', async (req, res, next) => {
   ).catch(err => console.log(err));
   res.send(matched);
 })
+
+
 /**
  * The following functions need to be removed before deployment
+ * and are just for debugging
  */
 
 
+ //Populates the database
 router.get('/populate', async(req, res, next) => {
   const { salt, passHash } = saltHash.saltHashPassword("password");
   await Hacker.bulkCreate(
@@ -258,11 +357,10 @@ router.get('/populate', async(req, res, next) => {
   });
 })
 
+//drop table
 router.get('/drop', (req, res, next) => {
   db.sync({force:true}).then(() => {
     res.send("Table Dropped");
     return;
   });
 })
-
-// router.post('/dogs', (req, res, next) =>{})
