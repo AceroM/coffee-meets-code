@@ -29,10 +29,20 @@ router.post('/login', async(req, res, next) => {
     if(!verified){
       res.status(404).send("Password Incorrect");
     }else{
-      res.status(201).send({data: {
-        isLoggedIn: true,
-        username: "Miguel"
-      }});
+      res.status(201).send({
+        data: {
+          isLoggedIn: true,
+          username: username,
+          firstName: hacker.firstName,
+          lastName: hacker.lastName,
+          email: hacker.email,
+          imageUrl: hacker.imageUrl,
+          githubUrl: hacker.githubUrl,
+          hackathons: hacker.hackathons,
+          matched: hacker.matched,
+          used: hacker.used,
+        }
+      });
     }
   }
 })
@@ -61,8 +71,9 @@ router.post('/register', async(req, res, next) => {
 router.post('/swipedRight', async(req, res, next) => {
   const {user, swipedOn} = req.body;
   /**
-   * Confirm this is allowed
-   * Then check if swipedOn is in my likesMe
+   * Logic is as follows: 
+   * 
+   * Check if swipedOn is in my likesMe
    * If so, move swipedOn into my used and move my name into swipedOn's matched
    * 
    * Else, check if my name is in swipedOn's used
@@ -126,7 +137,8 @@ router.post('/swipedRight', async(req, res, next) => {
 router.post('/swipedLeft', async(req, res, next) => {
   const {user, swipedOn} = req.body;
   /**
-   * Confirm this is allowed
+   * Logic is as follows: 
+   * 
    * Move swipedOn's name into my used
    * If swipedOn's name is in my likesMe, remove it
    */
@@ -164,6 +176,11 @@ router.post('/swipedLeft', async(req, res, next) => {
     console.log(err);
   });
 })
+
+/**
+ * The following functions need to be removed before deployment
+ */
+
 
 router.get('/populate', async(req, res, next) => {
   const { salt, passHash } = saltHash.saltHashPassword("password");
