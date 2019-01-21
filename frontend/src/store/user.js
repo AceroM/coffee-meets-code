@@ -14,7 +14,8 @@ const initialUser = {
     data: {
         isLoggedIn: false,
         username: "",
-        password: ""
+        password: "",
+        error: ""
     }
 };
 
@@ -30,7 +31,15 @@ export const auth = (username, password) => async dispatch => {
         res = await axios.post('api/hackers/login', {username, password});
     } catch(authError) {
         console.error(authError)
-        return dispatch(getUser({ data: { isLoggedIn: false, username: "" }}))
+        return dispatch(getUser({
+            data: {
+                isLoggedIn: false,
+                username: "",
+                error: {
+                    response: "Invalid credentials please try again"
+                }
+            }
+        }))
     }
 
     try {
