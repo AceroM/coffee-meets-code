@@ -37,23 +37,13 @@ class SwipePage extends Component {
           <div>You're out of hackers!</div>
         );
       }
-    render() {
-        const wrapperStyle = {
-            backgroundColor: "#024773",
-            height: "600px",
-            width: "600px"
-        }
-        const cardStyle = {
-            height: "300px",
-            width: "300px"
-        }
+    render() {        
         let cards = this.state.other_hackers.map(item => {            
             return(
                 <Card key={item.username} 
                     data={item} 
                     onSwipeLeft={this.onSwipeLeft.bind(this)}
-                    onSwipeRight={this.onSwipeRight.bind(this)}
-                    style={cardStyle}>
+                    onSwipeRight={this.onSwipeRight.bind(this)}>
                     Name: {item.firstName} {item.lastName}
                 </Card>
             );           
@@ -62,8 +52,7 @@ class SwipePage extends Component {
         return (            
             <div>
                 HERE R UR POSSIBLE SWIPEZ <br/>
-                <CardWrapper style={wrapperStyle}
-                    addEndCard={this.getEndCard.bind(this)}>
+                <CardWrapper addEndCard={this.getEndCard.bind(this)}>
                     {cards}
                 </CardWrapper>                    
             </div>
