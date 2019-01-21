@@ -2,6 +2,9 @@ const router = require('express').Router();
 const { db, Hacker } = require('../models')
 const saltHash = require('./saltHash');
 
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op
+
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
@@ -175,6 +178,17 @@ router.post('/swipedLeft', async(req, res, next) => {
     res.status(404).send("Error found, check console");
     console.log(err);
   });
+})
+
+router.get('/allExcept/:username', async (req, res, next) => {
+  const hackers = await Hacker.findAll({
+    where: {
+      username: {
+        [Op.not]: req.params.username
+      }
+    }
+  });
+  res.send(hackers);
 })
 
 /**

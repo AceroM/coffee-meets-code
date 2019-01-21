@@ -25,7 +25,7 @@ class Login extends Component {
                         /> 
                         <Route
                             path="/swipe"
-                            render={(props) => <SwipePage {...props} username={username}/>}
+                            render={(props) => <SwipePage {...props} data={this.props}/>}
                         />
                     </Switch>
                 ) : (
@@ -70,11 +70,13 @@ class Login extends Component {
  */
 
 const mapState = state => {
-    console.log(state)
+    console.log(state);
+    return state.user.data;
     return {
         isLoggedIn: state.user.data.isLoggedIn,
         username: state.user.data.username
     }
+    
 }
 
 export default withRouter(connect(mapState)(Login))
