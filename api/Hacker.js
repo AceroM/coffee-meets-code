@@ -191,6 +191,20 @@ router.get('/allExcept/:username', async (req, res, next) => {
   res.send(hackers);
 })
 
+router.get('/matched/:username', async (req, res, next) => {
+  const hackers = await Hacker.findOne({
+    where: {
+      username: req.params.username
+    }
+  });
+  let matched = hackers.matched;
+  let used = [...hackers.used, ...hackers.matched];
+  Hacker.update(
+    {matched: [], used: used},
+    {where: {username: req.params.username}}
+  ).catch(err => console.log(err));
+  res.send(matched);
+})
 /**
  * The following functions need to be removed before deployment
  */
