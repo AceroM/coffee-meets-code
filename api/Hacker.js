@@ -19,7 +19,7 @@ router.post('/login', async(req, res, next) => {
   const { username, password } = req.body;
   const hacker = await Hacker.findOne({
     where: {
-      username: username
+      username
     }
   });
   if (!hacker){

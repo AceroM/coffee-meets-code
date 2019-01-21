@@ -8,6 +8,7 @@ const { db } = require("./models");
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded());
+
 app.use("/api", require("./api"));
 
 db.authenticate()
