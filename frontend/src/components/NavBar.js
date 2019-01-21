@@ -29,9 +29,10 @@ const NavBar = ({ handleClick, isLoggedIn }) => {
 
 const mapState = state => {
     return {
-        isLoggedIn: !state.user.id
+        isLoggedIn: !state.user.data.isLoggedIn
     }
 }
+
 
 NavBar.propTypes = {
     handleClick: PropTypes.func.isRequired,

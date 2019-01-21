@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 
 const GET_USER = 'GET_USER';
+const LOGOUT_USER = 'LOGOUT_USER';
 
 /**
  * Initial State
@@ -22,8 +23,8 @@ const initialUser = {
 /**
  * Action Creators
  */
-
 export const getUser = user => ({type: GET_USER, user})
+export const logoutUser = user => ({type: LOGOUT_USER, user})
 
 export const auth = (username, password) => async dispatch => {
     let res;
@@ -41,7 +42,6 @@ export const auth = (username, password) => async dispatch => {
             }
         }))
     }
-
     try {
         dispatch(getUser(res.data))
     } catch(err) {
@@ -58,6 +58,12 @@ export default function(state = initialUser, action) {
         case GET_USER:
             console.log(action.user)
             return action.user
+        case LOGOUT_USER:
+            console.log(action.user)
+            return {
+                ...state,
+                isLoggedIn: false
+            }
         default:
             return state
     }
