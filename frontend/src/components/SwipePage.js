@@ -32,21 +32,38 @@ class SwipePage extends Component {
             swipedOn: data.username
         });
     }
+    getEndCard() {
+        return(
+          <div>You're out of hackers!</div>
+        );
+      }
     render() {
+        const wrapperStyle = {
+            backgroundColor: "#024773",
+            height: "600px",
+            width: "600px"
+        }
+        const cardStyle = {
+            height: "300px",
+            width: "300px"
+        }
         let cards = this.state.other_hackers.map(item => {            
             return(
                 <Card key={item.username} 
                     data={item} 
                     onSwipeLeft={this.onSwipeLeft.bind(this)}
-                    onSwipeRight={this.onSwipeRight.bind(this)}>
+                    onSwipeRight={this.onSwipeRight.bind(this)}
+                    style={cardStyle}>
                     Name: {item.firstName} {item.lastName}
                 </Card>
             );           
         });
-        return (
+        
+        return (            
             <div>
                 HERE R UR POSSIBLE SWIPEZ <br/>
-                <CardWrapper>
+                <CardWrapper style={wrapperStyle}
+                    addEndCard={this.getEndCard.bind(this)}>
                     {cards}
                 </CardWrapper>                    
             </div>
