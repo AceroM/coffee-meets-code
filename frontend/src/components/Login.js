@@ -10,7 +10,7 @@ import '../styles/Login.scss';
 import LoginForm from './AuthForm'
 import Home from './Home'
 import SwipePage from './SwipePage'
-import MessagePage from './MessagePage';
+import MessagePage from './Message/MessagePage';
 import HackathonPage from './HackathonPage'
 
 class Login extends Component {
