@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { logoutUser } from '../store';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import '../styles/NavBar.scss';
 
 const NavBar = ({ handleClick, isLoggedIn, username }) => {
     return (
