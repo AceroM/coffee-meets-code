@@ -7,26 +7,28 @@ import '../styles/NavBar.scss';
 
 const NavBar = ({ handleClick, isLoggedIn, username }) => {
     return (
-        <div>
-            <h1> CoffeeMeetsCode </h1>
-            <nav>
+        <div className="header">
+            <img id="logo" src={require('../static/bagel.png')}/>
+            {/* <h1> CoffeeMeetsCode </h1> */}
+            <nav className="mainNav">
             { isLoggedIn ? (
-                <div>
+                <ul className="nav-items">
                     <Link to="/"> Home </Link>
                     <Link to="/swipe"> Swipe </Link>
+                    <Link to="/messages"> Messages </Link>
+                    <Link to="/hackathons"> Hackathons </Link>
                     <a href="#" onClick={handleClick}>
                         Logout
                     </a>
                     <p> {username} </p>
-                </div>
+                </ul>
             ) : (
-                <div>
+                <ul className="nav-items">
                     <Link to="/">Login</Link>
                     <Link to="/register">Register</Link>
-                </div>
+                </ul>
             )}
             </nav>
-            <hr/>
         </div>
     );
 };
