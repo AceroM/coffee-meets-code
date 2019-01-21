@@ -10,6 +10,8 @@ import '../styles/Login.scss';
 import LoginForm from './AuthForm'
 import Home from './Home'
 import SwipePage from './SwipePage'
+import MessagePage from './MessagePage';
+import HackathonPage from './HackathonPage'
 
 class Login extends Component {
     render() {
@@ -26,6 +28,14 @@ class Login extends Component {
                         <Route
                             path="/swipe"
                             render={(props) => <SwipePage {...props} username={username}/>}
+                        />
+                        <Route
+                            path="/messages"
+                            render={(props) => <MessagePage {...props} username={username}/>}
+                        />
+                        <Route
+                            path="/hackathons"
+                            render={(props) => <HackathonPage {...props} username={username}/>}
                         />
                     </Switch>
                 ) : (
