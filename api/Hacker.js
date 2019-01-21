@@ -19,7 +19,7 @@ router.post('/login', async(req, res, next) => {
   const { username, password } = req.body;
   const hacker = await Hacker.findOne({
     where: {
-      username: username
+      username
     }
   });
   if (!hacker){
@@ -29,10 +29,12 @@ router.post('/login', async(req, res, next) => {
     if(!verified){
       res.status(404).send("Password Incorrect");
     }else{
-      res.status(201).send({data: {
-        isLoggedIn: true,
-        username: "Miguel"
-      }});
+      res.status(201).send({
+        data: {
+          isLoggedIn: true,
+          username
+        }
+      });
     }
   }
 })
