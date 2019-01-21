@@ -1,4 +1,6 @@
+# database files since we all have different databases
 config/database.js
+models/db.js
 
 # Logs
 logs
