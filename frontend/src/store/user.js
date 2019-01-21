@@ -60,10 +60,7 @@ export default function(state = initialUser, action) {
             return action.user
         case LOGOUT_USER:
             console.log(action.user)
-            return {
-                ...state,
-                isLoggedIn: false
-            }
+            return action.user
         default:
             return state
     }

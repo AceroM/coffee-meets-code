@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { logoutUser } from '../store';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -29,14 +30,22 @@ const NavBar = ({ handleClick, isLoggedIn }) => {
 
 const mapState = state => {
     return {
-        isLoggedIn: !state.user.data.isLoggedIn
+        isLoggedIn: state.user.data.isLoggedIn
     }
 }
 
+const mapDispatch = dispatch => {
+    return {
+        handleClick() {
+            // dispatch(getUser({isLoggedIn: true, username }));
+            dispatch(logoutUser({ isLoggedIn: false }));
+        }
+    }
+}
 
 NavBar.propTypes = {
     handleClick: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired
 };
 
-export default connect(mapState)(NavBar);
+export default connect(mapState, mapDispatch)(NavBar);
