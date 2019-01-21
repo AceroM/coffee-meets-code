@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import '../styles/Login.scss';
 import LoginForm from './AuthForm'
 import Home from './Home'
+import SwipePage from './SwipePage'
 
 class Login extends Component {
     render() {
@@ -17,7 +18,16 @@ class Login extends Component {
             <div className="login-form">
                 {/* { JSON.stringify(this.props) } */}
                 { isLoggedIn ? (
-                    <Home username={username}/>
+                    <Switch>
+                        <Route 
+                            exact path="/" 
+                            render={(props) => <Home {...props} username={username}/>} 
+                        /> 
+                        <Route
+                            path="/swipe"
+                            render={(props) => <SwipePage {...props} username={username}/>}
+                        />
+                    </Switch>
                 ) : (
                 <div>
                 <h1>Login / Register</h1>
