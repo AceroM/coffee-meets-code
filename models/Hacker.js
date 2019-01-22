@@ -29,14 +29,16 @@ const Hacker = db.define("hacker", {
     allowNull: false,
     validate:{
       notEmpty: true
-    }
+    }, 
+    defaultValue: "Joe"
   },
   lastName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate:{
       notEmpty: true
-    }
+    }, 
+    defaultValue: "Schmoe"
   },
   email: {
     type: Sequelize.STRING,
@@ -45,7 +47,8 @@ const Hacker = db.define("hacker", {
     validate: {
       isEmail: true,
       notEmpty: true
-    }
+    },
+    defaultValue: "fake@email.com"
   },
   age: {
     type: Sequelize.INTEGER,
@@ -61,6 +64,7 @@ const Hacker = db.define("hacker", {
   },
   githubUrl: {
     type: Sequelize.STRING,
+    defaultValue: "github.com/kaizenc",
     validate:{
       isUrl: true,
     }

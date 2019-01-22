@@ -86,6 +86,29 @@ export const auth = (username, password) => async dispatch => {
     }
 }
 
+export const registerUser = (username, password) => async dispatch => {
+    let res;
+    try {
+        res = await axios.post('api/hackers/register', {username, password});
+    } catch(authError) {
+        console.error(authError)
+        return dispatch(logoutUser({
+            data: {
+                isLoggedIn: false,
+                username: "",
+                error: {
+                    response: "Invalid credentials please try again"
+                }
+            }
+        }))
+    }
+    try {
+        dispatch(getUser(res.data))
+    } catch(err) {
+        console.error(err)
+    }
+}
+
 /**
  * REDUCERS
  */
