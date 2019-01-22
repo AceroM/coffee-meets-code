@@ -10,6 +10,7 @@ io.on('connection', function(socket){
   //Listen for connection, when one happens:
   socket.on('user_connect', function(name){
     console.log(name + " connected");
+    io.emit('user_connect', name);
   });
   //Requires socket.io to be implemented in html
 

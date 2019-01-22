@@ -47,9 +47,17 @@ const Hacker = db.define("hacker", {
       notEmpty: true
     }
   },
+  age: {
+    type: Sequelize.INTEGER,
+    defaultValue: 3000,
+  },
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue: "https://www.argentum.org/wp-content/uploads/2018/12/blank-profile-picture-973460_6404.png" 
+  },
+  description: {
+    type: Sequelize.TEXT,
+    defaultValue: "just ur regular hacker lol"
   },
   githubUrl: {
     type: Sequelize.STRING,
