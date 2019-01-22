@@ -21,7 +21,7 @@ io.on('connection', function(socket){
 
   //When someone sends a private message:
   socket.on('pm', function(msg, name, receiver){    
-    io.emit('pm', msg, name, receiver);
+    io.emit('pm'+receiver, msg, name);
   });
 });
 

@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import './index.scss';
 import UserHeader from './UserHeader';
 import RoomHeader from './RoomHeader/RoomHeader';
+import RoomList from './RoomList/RoomList'
 import EmptyChat from './EmptyChat/EmptyChat';
 import CreateMessageForm from './CreateMessageForm/CreateMessageForm';
+import MessageList from './MessageList/MessageList';
+import { connect } from 'react-redux';
 
 class MessagePage extends Component {
     state = {
@@ -11,8 +14,8 @@ class MessagePage extends Component {
         messages: [],
         talkedTo: true
     }
+    
     render() {
-        const { username } = this.props;
         const dummyData = {
             username: "kaizenc",
             name: "Kaizen Castanos",
@@ -20,17 +23,20 @@ class MessagePage extends Component {
             lastName: "Castanos",
             imageUrl: "https://avatars0.githubusercontent.com/u/8743619?s=460&v=4",
         }
+        const { talkingTo } = this.props;
         return (
             <main className="messageBody">
                 {/* This is the message page { username } */}
                 <aside>
                     <UserHeader data={dummyData}/>
+                    <RoomList matches={{}}/>
                 </aside>
                 <section>
                     <RoomHeader roomName={"Miguel"}/>
-                    {this.state.talkedTo ? (
+                    {this.props.talkingTo ? (
                         <row->
                             <col->
+                                <MessageList/>
                                 <CreateMessageForm/>>
                             </col->
                         </row->
@@ -43,4 +49,10 @@ class MessagePage extends Component {
     }
 }
 
-export default MessagePage;
+const mapState = state => {
+    return {
+        talkingTo: state.user.data.talkingTo
+    }
+}
+
+export default connect(mapState)(MessagePage)

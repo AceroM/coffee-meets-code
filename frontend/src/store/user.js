@@ -6,9 +6,8 @@ import axios from 'axios'
 
 const GET_USER = 'GET_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
-const GET_HACKATHON = 'GET_HACKATHON';
-const GET_CHAT = 'GET_CHAT';
-const CREATE_CHAT = 'CREATE_CHAT';
+const POPULATE_MESSAGES = 'POPULATE_MESSAGES';
+const CHANGE_CONVO = 'CHANGE_CONVO';
 
 /**
  * Initial State
@@ -24,10 +23,11 @@ const CREATE_CHAT = 'CREATE_CHAT';
   *     url: "http://hackthe6ix.com/"
   * }
   */
- 
 const initialUser = {
     data: {
         isLoggedIn: false,
+        firstName: "",
+        lastName: "",
         username: "",
         password: "",
         error: "",
@@ -40,10 +40,16 @@ const initialUser = {
             "startDate": "2018-08-24",
             "url": "http://hackthe6ix.com/"
         }],
-        githubUrl: ""
-    },
-    rooms: [],
-    matches: []
+        githubUrl: "",
+        description: "",
+        age: 69,
+        imageUrl: "",
+        likesMe: [],
+        matched: [],
+        used: [],
+        matches: {},
+        talkingTo: ""
+    }
 };
 
 /**
@@ -51,7 +57,11 @@ const initialUser = {
  */
 export const getUser = user => ({type: GET_USER, user});
 export const logoutUser = user => ({type: LOGOUT_USER, user});
-export const getHackathon = hackathon => ({type: GET_HACKATHON});
+export const populateMessages = user => ({type: POPULATE_MESSAGES, user});
+export const changeConvo = user => ({type: CHANGE_CONVO, user});
+// export const populateMessages = (peopleArr) => dispatch => {
+    // return dispatch()
+// }
 
 export const auth = (username, password) => async dispatch => {
     let res;
@@ -59,7 +69,7 @@ export const auth = (username, password) => async dispatch => {
         res = await axios.post('api/hackers/login', {username, password});
     } catch(authError) {
         console.error(authError)
-        return dispatch(getUser({
+        return dispatch(logoutUser({
             data: {
                 isLoggedIn: false,
                 username: "",
@@ -81,6 +91,7 @@ export const auth = (username, password) => async dispatch => {
  */
 
 export default function(state = initialUser, action) {
+    var data = state
     switch(action.type) {
         case GET_USER:
             console.log(action.user)
@@ -88,9 +99,16 @@ export default function(state = initialUser, action) {
         case LOGOUT_USER:
             console.log(action.user)
             return action.user
-        case GET_HACKATHON:
-            console.log(action)
-            return action.hackathon
+        case POPULATE_MESSAGES:
+            data.data.matches=action.user;
+            return {
+                ...data,
+            }
+        case CHANGE_CONVO:
+            data.data.talkingTo=action.user;
+            return {
+                ...data,
+            }
         default:
             return state
     }
