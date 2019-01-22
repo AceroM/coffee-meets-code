@@ -6,8 +6,8 @@ import axios from 'axios'
 
 const GET_USER = 'GET_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
-const GET_HACKATHON = 'GET_HACKATHON';
 const POPULATE_MESSAGES = 'POPULATE_MESSAGES';
+const CHANGE_CONVO = 'CHANGE_CONVO';
 
 /**
  * Initial State
@@ -46,7 +46,9 @@ const initialUser = {
         imageUrl: "",
         likesMe: [],
         matched: [],
-        used: []
+        used: [],
+        matches: {},
+        talkingTo: ""
     }
 };
 
@@ -55,8 +57,8 @@ const initialUser = {
  */
 export const getUser = user => ({type: GET_USER, user});
 export const logoutUser = user => ({type: LOGOUT_USER, user});
-// export const getHackathon = hackathon => ({type: GET_HACKATHON});
-export const populateMessages = people => ({type: POPULATE_MESSAGES}, people)
+export const populateMessages = user => ({type: POPULATE_MESSAGES, user});
+export const changeConvo = user => ({type: CHANGE_CONVO, user});
 // export const populateMessages = (peopleArr) => dispatch => {
     // return dispatch()
 // }
@@ -89,6 +91,7 @@ export const auth = (username, password) => async dispatch => {
  */
 
 export default function(state = initialUser, action) {
+    var data = state
     switch(action.type) {
         case GET_USER:
             console.log(action.user)
@@ -97,13 +100,14 @@ export default function(state = initialUser, action) {
             console.log(action.user)
             return action.user
         case POPULATE_MESSAGES:
-            console.log(action)
-            console.log(state.data.matches);
+            data.data.matches=action.user;
             return {
-                ...state,
-                matches: {
-                    "lol": []
-                }
+                ...data,
+            }
+        case CHANGE_CONVO:
+            data.data.talkingTo=action.user;
+            return {
+                ...data,
             }
         default:
             return state

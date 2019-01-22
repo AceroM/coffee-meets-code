@@ -309,6 +309,10 @@ router.get('/matched/:username', async (req, res, next) => {
         }
       }
     }).then(final => {
+      final = final.map(m => {
+        m['dataValues']['messages'] = []
+        return m;
+      });
       res.status(201).send(final);
     })
     
