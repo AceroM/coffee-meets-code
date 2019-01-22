@@ -16,6 +16,7 @@ class HackathonPage extends Component {
         fetch(mlhAPIUrl)
             .then(res => res.json())
             .then(hackathons => { // hackathons -> Contains list of all hackathon objects
+                console.log(hackathons)
                 // upcomingHack -> filters hackathons by future dates ONLY
                 var upcomingHack = hackathons.filter(hackathon => hackathon.startDate > currISODate);
                 // setting state's upcomingHackathons property to upcomingHack
@@ -52,7 +53,7 @@ class HackathonPage extends Component {
 
         return (
             <div>
-                this is a list of hackathons
+                Fetching Hackathons...
                 {hackathonsList}
             </div>
         );
