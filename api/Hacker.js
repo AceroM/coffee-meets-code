@@ -294,13 +294,26 @@ router.get('/allExcept/:username', async (req, res, next) => {
  *    Status 201 and an array of usernames if successful
  */
 router.get('/matched/:username', async (req, res, next) => {
-  const hackers = await Hacker.findOne({
+  //return image url also
+  Hacker.findOne({
     where: {
       username: req.params.username
     }
-  });
-  let matched = hackers.matched;
-  res.send(matched);
+  }).then(hackers => {
+    let matched = hackers.matched;
+    Hacker.findAll({
+      attributes: ['username', 'imageUrl'],
+      where: {
+        username: {
+          [Op.or]: matched
+        }
+      }
+    }).then(final => {
+      res.status(201).send(final);
+    })
+    
+  });    
+  
 })
 
 
