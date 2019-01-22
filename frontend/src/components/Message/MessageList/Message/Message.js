@@ -7,10 +7,17 @@ const time = string => {
     return `${date.getHours()}:${minutes < 10 ? '0' + minutes : minutes}`
 }
 
-const Message = () => {
+const Message = ({ name, imageUrl, message }) => {
     return (
         <li className={style.component}>
-            
+            <img
+                src={imageUrl}
+                alt={name}
+            />
+            <span>
+                {`${name} | ${time(new Date())}`}
+            </span>
+            <p> {message} </p>
         </li>
     );
 };
