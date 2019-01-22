@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import imgUrl from '../static/tinder.png';
+import { connect } from 'react-redux';
 
 class Home extends Component {
     constructor(props) {
@@ -11,16 +12,10 @@ class Home extends Component {
     }
     
     render () {
-        const username = "Kai - test user";
-        var profileImage = new Image(100,200);
-        profileImage.src = imgUrl;
+        // const username = "Kai - test user";
         const age = 21;
         const description = `This is my 
                 profile's description`;
-        //box for hackathon's you're part of
-        //teammates (if any)
-        //skills (put icon of language next to skill)
-
         /*  --------------THIS IS USING SEMANTIC UI FROM OUR FIRST PROJECT-----------------
             -Can use this to display the "hackathon" and "teammates" and "skills" boxes later-
                 <div class="ui vertical stripe quote segment">
@@ -38,16 +33,24 @@ class Home extends Component {
                     </div>
                 </div>
         */
+        // pulling the user information from the store and storing them as variables
+        const { username, imageUrl, email, hackathons } = this.props;
+        // const hackathonList = hackathons.map(h => (
+        //     <div className="hackathon">
+        //         <h1>{h.name}</h1>
+        //         <img src={h.imageUrl}/>
+        //         <a href={h.url}>{h.url}</a>
+        //     </div>
+        // ))
         return (
-            
             <div className="profile">
                 <p> Welcome back to CoffeeMeetsCode, { username } </p>
                 <h2> My Profile </h2>
-                <img src ={imgUrl} width="200" height="200" alt="Profile picture"></img>
+                <img src ={imageUrl} width="200" height="200" alt="Profile picture"></img>
                 <h3> { username }, { age } </h3>
+                <h3> { email } </h3>
                 <br></br>
                 <p> { description } </p>
-
                 <br></br>
                 <table>
                     <tr>
@@ -64,4 +67,23 @@ class Home extends Component {
     };
 };
 
-export default Home;
+/**
+ * Take in the user information from the redux store
+ */
+const mapState = state => {
+    console.log(state)
+    return {
+        username: state.user.data.username,
+        imageUrl: state.user.data.imageUrl,
+        email: state.user.data.email,
+        hackathons: state.user.data.hackathons,
+    }
+}
+
+const mapDispatch = dispatch => {
+    return {
+    }
+}
+// Home.PropTypes
+
+export default connect(mapState)(Home);

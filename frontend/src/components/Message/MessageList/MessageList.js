@@ -5,7 +5,7 @@ import Message from './Message/Message';
 /**
  * Message List component
  */
-const MessageList = () => {
+const MessageList = ({ messages = {}, user, createConvo }) => {
     return (
         <ul id="messages" className={style.component}>
             <wrapper->
