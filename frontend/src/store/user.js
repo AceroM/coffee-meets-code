@@ -48,7 +48,7 @@ const initialUser = {
         matched: [],
         used: [],
         matches: {},
-        talkingTo: ""
+        talkingTo: "Miguel"
     }
 };
 
