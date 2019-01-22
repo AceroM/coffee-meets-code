@@ -153,15 +153,18 @@ router.post('/swipedRight', async(req, res, next) => {
       /**
        * This is where all of the logic actually is
        */
+      let response = "Succeeded";
       let likesMe1 = hacker.likesMe;
       let used1 = hacker.used;
+      let matched1 = hacker.matched;
       let likesMe2 = hacker2.likesMe;
       let used2 = hacker2.used;
       let matched2 = hacker2.matched;
       if(likesMe1.includes(swipedOn)){
-        used1.push(swipedOn);
+        matched1.push(swipedOn);
         matched2.push(user);
         likesMe1.splice(likesMe1.indexOf(swipedOn), 1);
+        response = "matched";
       }else{
         if(used2.includes(user)){
           used1.push(swipedOn);
@@ -170,7 +173,7 @@ router.post('/swipedRight', async(req, res, next) => {
         }
       }
       Hacker.update(
-        {likesMe: likesMe1, used: used1},
+        {likesMe: likesMe1, used: used1, matched: matched1},
         {where: {username: user}}
       )
       .then(() => {
@@ -178,7 +181,7 @@ router.post('/swipedRight', async(req, res, next) => {
           {likesMe: likesMe2, used: used2, matched: matched2},
           {where: {username: swipedOn}}
         ).catch(err => console.log(err));
-        res.status(201).send("Succeded");
+        res.status(201).send(response);
       })
       .catch(err => console.log(err));
       
@@ -273,7 +276,7 @@ router.get('/allExcept/:username', async (req, res, next) => {
         username: req.params.username
       }
     }).then(huh => {
-      let result = hackers.filter(x => !huh.used.includes(x.username));
+      let result = hackers.filter(x => !huh.used.includes(x.username) && !huh.matched.includes(x.username));
       res.status(201).send(result);    
     }).catch(err => console.log(err));    
   }).catch(err => {
@@ -284,8 +287,7 @@ router.get('/allExcept/:username', async (req, res, next) => {
 
 /**
  * Get /matched/:username
- * Returns a list of new matches for the user
- * Updates the database to move those items to the used array
+ * Returns a list of matches with 
  * @params
  *    A string username
  * @return
@@ -298,11 +300,6 @@ router.get('/matched/:username', async (req, res, next) => {
     }
   });
   let matched = hackers.matched;
-  let used = [...hackers.used, ...hackers.matched];
-  Hacker.update(
-    {matched: [], used: used},
-    {where: {username: req.params.username}}
-  ).catch(err => console.log(err));
   res.send(matched);
 })
 
