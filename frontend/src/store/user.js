@@ -48,7 +48,7 @@ const initialUser = {
         matched: [],
         used: [],
         matches: {},
-        talkingTo: ""
+        talkingTo: "Miguel"
     }
 };
 
@@ -94,7 +94,11 @@ export default function(state = initialUser, action) {
     var data = state
     switch(action.type) {
         case GET_USER:
-            console.log(action.user)
+        console.log(data)
+        console.log({
+            ...data,
+            data: action.user
+        })
             return action.user
         case LOGOUT_USER:
             console.log(action.user)
