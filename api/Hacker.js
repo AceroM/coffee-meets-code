@@ -275,7 +275,10 @@ router.get('/allExcept/:username', async (req, res, next) => {
     }).then(huh => {
       let result = hackers.filter(x => !huh.used.includes(x.username));
       res.status(201).send(result);    
-    });    
+    }).catch(err => console.log(err));    
+  }).catch(err => {
+    res.status(404).send("Cannot find username, check console");
+    console.log(err);
   });
 })
 
