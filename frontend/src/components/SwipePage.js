@@ -13,6 +13,7 @@ class SwipePage extends Component {
     componentDidMount(){
         axios.get('api/hackers/allExcept/' + this.props.data.username)
             .then(response => {
+                //Maps data to users
                 let temp = response.data.map(x => x.username);
                 this.setState({
                     other_hackers: response.data,
@@ -20,6 +21,7 @@ class SwipePage extends Component {
                 });
             });
     }
+    //The following functions are bound to each card
     onSwipeLeft(data){
         axios.post('api/hackers/swipedLeft', {
             user: this.props.data.username, 
@@ -36,8 +38,9 @@ class SwipePage extends Component {
         return(
           <div>You're out of hackers!</div>
         );
-      }
-    render() {        
+    }
+    render() {
+        //Convert the hackers data to an array of cards        
         let cards = this.state.other_hackers.map(item => {            
             return(
                 <Card key={item.username} 

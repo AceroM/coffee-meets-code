@@ -7,7 +7,7 @@ import Login from './components/Login'
 import './styles/App.scss';
 
 class App extends Component {
-render() {
+  render() {
     return (
       <Provider store={store}>
         <Router>
