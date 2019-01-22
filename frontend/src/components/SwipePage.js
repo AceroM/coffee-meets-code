@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Card, CardWrapper } from 'react-swipeable-cards';
+import CardContent from './CardContent';
 
 class SwipePage extends Component {
     constructor(props){
@@ -47,7 +48,7 @@ class SwipePage extends Component {
                     data={item} 
                     onSwipeLeft={this.onSwipeLeft.bind(this)}
                     onSwipeRight={this.onSwipeRight.bind(this)}>
-                    Name: {item.firstName} {item.lastName}
+                    <CardContent hacker={item}/>
                 </Card>
             );           
         });
