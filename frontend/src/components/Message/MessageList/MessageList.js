@@ -70,6 +70,7 @@ class MessageList extends React.Component {
 };
     
 const mapState = state => {
+    console.log(state)
     return {
         username: state.user.data.username,
         matches: state.user.data.matches,

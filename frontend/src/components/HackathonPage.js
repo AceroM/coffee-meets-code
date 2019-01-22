@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import HackathonsList from '../components/HackathonPage/HackathonsList';
+import '../styles/HackathonPage.scss';
 
 class HackathonPage extends Component {
     constructor(props) {
@@ -53,8 +54,7 @@ class HackathonPage extends Component {
 
         console.log("Upcoming hackathons: ", this.state.upcomingHackathons)
         return (
-            <div>
-                Fetching Hackathons...
+            <div className="hackathonPage">
                 <div className="hackathons-container">
                     <h1>Hackathons</h1>
                     <HackathonsList data={this.state.upcomingHackathons} />
