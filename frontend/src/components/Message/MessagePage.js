@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './index.scss';
 import UserHeader from './UserHeader';
 import RoomHeader from './RoomHeader/RoomHeader';
+import RoomList from './RoomList/RoomList'
 import EmptyChat from './EmptyChat/EmptyChat';
 import CreateMessageForm from './CreateMessageForm/CreateMessageForm';
+import MessageList from './MessageList/MessageList';
 
 class MessagePage extends Component {
     state = {
@@ -25,12 +27,14 @@ class MessagePage extends Component {
                 {/* This is the message page { username } */}
                 <aside>
                     <UserHeader data={dummyData}/>
+                    <RoomList matches={{}}/>
                 </aside>
                 <section>
                     <RoomHeader roomName={"Miguel"}/>
                     {this.state.talkedTo ? (
                         <row->
                             <col->
+                                <MessageList/>
                                 <CreateMessageForm/>>
                             </col->
                         </row->
