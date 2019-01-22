@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import HackathonsList from '../components/HackathonPage/HackathonsList';
 
 class HackathonPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            upcomingHackathons: []
+            upcomingHackathons: [] // After CDM, will contain array of ALL upcoming hackathon Objects
         }
     }
 
@@ -32,11 +33,10 @@ class HackathonPage extends Component {
 
     render() {
         const { username } = this.props;
-
         // hackathonsList -> Lists out all data from upcoming Hackathons as HTML
         const hackathonsList = this.state.upcomingHackathons.map(hackathon => {
             return (
-                <div className="hackathon-item">
+                <div>
                     <h1>Name: { hackathon.name }</h1>
                     <a href={ hackathon.url }> { hackathon.url } </a>
                     <p>startDate: { hackathon.startDate }</p>
@@ -51,10 +51,14 @@ class HackathonPage extends Component {
             )
         });
 
+        console.log("Upcoming hackathons: ", this.state.upcomingHackathons)
         return (
             <div>
                 Fetching Hackathons...
-                {hackathonsList}
+                <div className="hackathons-container">
+                    <h1>Hackathons</h1>
+                    <HackathonsList data={this.state.upcomingHackathons} />
+                </div>
             </div>
         );
     }
