@@ -5,8 +5,13 @@ import store from './store';
 import NavBar from './components/NavBar';
 import Login from './components/Login'
 import './styles/App.scss';
+import socketIOClient from 'socket.io-client';
 
 class App extends Component {
+  componentDidMount(){
+    const socket = socketIOClient("localhost:" + process.env.PORT);
+    socket.emit('user_connect', "Kaizen");
+  }
   render() {
     return (
       <Provider store={store}>

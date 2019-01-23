@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "60572f35d104eeb6259b",
-    "url": "/static/css/main.63ce3548.chunk.css"
+    "revision": "4b7c10bf0f9a19908ff6",
+    "url": "/static/css/main.3dd61a9f.chunk.css"
   },
   {
-    "revision": "60572f35d104eeb6259b",
-    "url": "/static/js/main.60572f35.chunk.js"
+    "revision": "4b7c10bf0f9a19908ff6",
+    "url": "/static/js/main.4b7c10bf.chunk.js"
   },
   {
-    "revision": "93e1aa22de40a64e7c3e",
-    "url": "/static/css/1.9edb12d0.chunk.css"
+    "revision": "bb4a08e5ac2d0748d141",
+    "url": "/static/css/1.fe386fa8.chunk.css"
   },
   {
-    "revision": "93e1aa22de40a64e7c3e",
-    "url": "/static/js/1.93e1aa22.chunk.js"
+    "revision": "bb4a08e5ac2d0748d141",
+    "url": "/static/js/1.bb4a08e5.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/static/media/tinder.4a1a44a7.png"
   },
   {
-    "revision": "950a48c8d6d954f0014ceacab2fc8611",
+    "revision": "0cc3a23d534febda85294a4c151d1e26",
     "url": "/index.html"
   }
 ];
