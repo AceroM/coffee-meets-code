@@ -22,22 +22,9 @@ const emptyList = (
 class MessageList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            messages: []
-        }
     }
-    
     componentDidMount(){
-        if (this.props.matches[this.props.talkingTo]) {
-            axios.get(`/api/hackers/matched/${this.props.username}`)
-            .then(res => {
-                let data = res.data;
-                this.props.handleMessage(data);
-            })
-        } else {
-            let messages = this.props.matches[this.props.talkingTo]['messages'];
-            this.setState({ messages });
-        }
+
     }
     /**
     //In render
@@ -48,20 +35,22 @@ class MessageList extends React.Component {
     })
     **/
     render() {
-        const dummy = {
-            "name": "Miguel Acero",
-            "imageUrl": "https://www.argentum.org/wp-content/uploads/2018/12/blank-profile-picture-973460_6404.png",
-            "message": "What's good cuzzz",
-            "createdAt": "13:29"
-        }
+        const { matches, talkingTo } = this.props;
+        const messages = matches[talkingTo];
         return (
             <ul id="messages" className={style.component}>
                 <wrapper->
-                    <Message 
-                        name={dummy.name}
-                        imageUrl={dummy.imageUrl}
-                        message={dummy.message}
-                    />
+                    { messages ? (
+                        messages.map(message => (
+                            <Message 
+                                name={message.name}
+                                imageUrl={message.imageUrl}
+                                message={message.message}
+                            />
+                        ))
+                    ) : (
+                        <p>{JSON.stringify(matches)}</p>
+                    )}
                 </wrapper->>
             </ul>
         );

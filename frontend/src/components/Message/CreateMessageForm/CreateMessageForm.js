@@ -1,9 +1,11 @@
 import React from 'react';
 import style from './index.module.scss'
+import { connect } from 'react-redux';
+import { addMessage } from '../../../store';
 //import socketIOClient from 'socket.io-client';
 
 // const CreateMessageForm = (data, person) => {
-const CreateMessageForm = () => {
+const CreateMessageForm = ({imageUrl, username, matches, talkingTo, handleSubmit }) => {
     /**
     //On Button Click
     const socket = socketIOClient("localhost:8000");
@@ -19,6 +21,7 @@ const CreateMessageForm = () => {
                     return
                 }
                 e.target[0].value = ''
+                handleSubmit(imageUrl, username, talkingTo, matches, message)
             }}
         >
             {/* <input placeholder="Type a message.." onInput={e => data.isTypingWith(person)}/> */}
@@ -33,4 +36,21 @@ const CreateMessageForm = () => {
     );
 };
 
-export default CreateMessageForm;
+const mapState = state => {
+    return {
+        imageUrl: state.user.data.imageUrl,
+        username: state.user.data.username,
+        matches: state.user.data.matches,
+        talkingTo: state.user.data.talkingTo
+    }
+}
+
+const mapDispatch = dispatch => {
+    return {
+        handleSubmit(imageUrl, username, talkingTo, matches, message) {
+            dispatch(addMessage(imageUrl, username, talkingTo, matches, message))
+        }
+    }
+}
+
+export default connect(mapState, mapDispatch)(CreateMessageForm);
