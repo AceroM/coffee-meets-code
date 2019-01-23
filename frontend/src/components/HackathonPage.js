@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HackathonsList from '../components/HackathonPage/HackathonsList';
 import '../styles/HackathonPage.scss';
+import { connect } from 'react-redux';
 
 class HackathonPage extends Component {
     constructor(props) {
@@ -33,35 +34,28 @@ class HackathonPage extends Component {
     }
 
     render() {
-        const { username } = this.props;
-        // hackathonsList -> Lists out all data from upcoming Hackathons as HTML
-        const hackathonsList = this.state.upcomingHackathons.map(hackathon => {
-            return (
-                <div>
-                    <h1>Name: { hackathon.name }</h1>
-                    <a href={ hackathon.url }> { hackathon.url } </a>
-                    <p>startDate: { hackathon.startDate }</p>
-                    <p>endDate: { hackathon.endDate }</p>
-                    <p>Location: { hackathon.location }</p>
-                    <p>isHighSchool: { hackathon.isHighSchool.toString() }</p> {/* Need toString for bool */}
-                    <h3>Hackathon Image: </h3> 
-                        <a href={ hackathon.imageUrl }>
-                            <img src={ hackathon.imageUrl }></img>
-                        </a>
-                </div>
-            )
-        });
-
         console.log("Upcoming hackathons: ", this.state.upcomingHackathons)
         return (
             <div className="hackathonPage">
                 <div className="hackathons-container">
                     <h1>Hackathons</h1>
-                    <HackathonsList data={this.state.upcomingHackathons} />
+                    <HackathonsList data={this.state.upcomingHackathons}/>
                 </div>
             </div>
         );
     }
 }
 
-export default HackathonPage;
+const mapState = state => {
+    console.log(state)
+    return {
+        hackathon: state.user.data.hackathons
+    }
+}
+
+const mapDispatch = dispatch => {
+    return {
+    }
+}
+
+export default connect(mapState,mapDispatch)(HackathonPage);

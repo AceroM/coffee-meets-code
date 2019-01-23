@@ -71,6 +71,8 @@ router.post('/login', async(req, res, next) => {
           hackathons: hacker.hackathons,
           matched: hacker.matched,
           used: hacker.used,
+          matches: {},
+          talkingTo: ""
         }
       });
     }
@@ -350,6 +352,9 @@ router.get('/populate', async(req, res, next) => {
         firstName: "Mark",
         lastName: "Finch",
         email: "fake@mail.com",
+        age: 69,
+        hackathons: ["<womxn/hacks>", "CUHackit"],
+        talkingTo: "jenny"
       },
       {
         username: "john",
@@ -393,4 +398,31 @@ router.get('/drop', (req, res, next) => {
     res.send("Table Dropped");
     return;
   });
+})
+
+/**
+ * Adds a hackathon to a user
+ */
+router.post('/hackathon/add', (req, res) => {
+  const { username, hackathonName } = req.body;
+  Hacker.findAll({
+    where: {
+      username
+    }
+  })
+  .then(hacker => {
+    let hackathons = hacker[0].hackathons;
+    hackathons.push(hackathonName);
+    Hacker.update({ hackathons }, {where: { username }})
+    .catch(err => {
+      res.status(404).send("Error found, check console");
+      console.log(err);
+    })
+    return hackathons
+  })
+  .then(m => res.status(201).send(m))
+  .catch(err => {
+    res.status(404).send("Error found, check console");
+    console.log(err);
+  })
 })

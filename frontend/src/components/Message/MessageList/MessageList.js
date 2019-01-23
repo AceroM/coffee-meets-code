@@ -28,7 +28,7 @@ class MessageList extends React.Component {
     }
     
     componentDidMount(){
-        if (!this.props.matches[this.props.talkingTo]) {
+        if (this.props.matches[this.props.talkingTo]) {
             axios.get(`/api/hackers/matched/${this.props.username}`)
             .then(res => {
                 let data = res.data;
@@ -37,7 +37,6 @@ class MessageList extends React.Component {
         } else {
             let messages = this.props.matches[this.props.talkingTo]['messages'];
             this.setState({ messages });
-            console.log(this.props)
         }
     }
     /**
