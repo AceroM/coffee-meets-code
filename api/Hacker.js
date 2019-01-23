@@ -73,7 +73,7 @@ router.post('/login', async(req, res, next) => {
           matched: hacker.matched,
           used: hacker.used,
           matches: {},
-          talkingTo: ""
+          talkingTo: hacker.talkingTo
         }
       });
     }
@@ -374,6 +374,7 @@ router.get('/populate', async(req, res, next) => {
         email: "fake@mail.com",
         age: 69,
         hackathons: ["<womxn/hacks>", "CUHackit"],
+        matched: ['jenny', 'kaizen'],
         talkingTo: "jenny"
       },
       {
@@ -391,6 +392,8 @@ router.get('/populate', async(req, res, next) => {
         firstName: "Jenny",
         lastName: "Hunter",
         email: "fake3@mail.com",        
+        talkingTo: "mark",
+        matched: ['mark', 'kaizen']
       },
       {
         username: "lucian",
@@ -399,6 +402,28 @@ router.get('/populate', async(req, res, next) => {
         firstName: "Lucian",
         lastName: "Senna",
         email: "fake4@mail.com",        
+      },
+      {
+        username: 'kai',
+        imageUrl: 'https://avatars0.githubusercontent.com/u/8743619?s=460&v=4',
+        passHash: passHash,
+        salt: salt,
+        firstName: "Kaizen",
+        lastName: "Castanos",
+        email: "kaizenc98@gmail.com",
+        talkingTo: "mark",
+        matched: ['mark', 'jenny']
+      },
+      {
+        username: 'Miguel5000',
+        imageUrl: 'https://avatars1.githubusercontent.com/u/21187304?s=460&v=4',
+        passHash: passHash,
+        salt: salt,
+        firstName: "Miguel",
+        lastName: "Acero",
+        email: "miguelacero528@gmail.com",
+        talkingTo: "",
+        matched: []
       }
     ]
     )

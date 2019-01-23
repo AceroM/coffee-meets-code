@@ -1,19 +1,29 @@
 import React from 'react';
 import style from './index.module.scss'
+import { connect } from 'react-redux';
 
 const placeholder =
     'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 
-const UserHeader = ({ data = {}}) => {
+const UserHeader = ({ username, firstName, lastName, imageUrl }) => {
     return (
         <header className={style.component}>
-            <img src={data.imageUrl || placeholder} alt={data.name}/>
+            <img src={imageUrl} alt={username}/>
             <div>
-                <h3>{data.firstName} {data.lastName}</h3>
-                <h5>@{data.username}</h5>
+                <h3>{firstName} {lastName}</h3>
+                <h5>@{username}</h5>
             </div>
         </header>
     );
 };
 
-export default UserHeader;
+const mapState = state => {
+    return {
+        username: state.user.data.username,
+        firstName: state.user.data.firstName,
+        lastName: state.user.data.lastName,
+        imageUrl: state.user.data.imageUrl
+    }
+}
+
+export default connect(mapState)(UserHeader);

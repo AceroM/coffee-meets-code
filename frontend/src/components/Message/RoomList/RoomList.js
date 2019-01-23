@@ -2,40 +2,55 @@ import React from 'react';
 import style from './index.module.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { auth } from '../../../store';
+import { changeTalkingto } from '../../../store'
 
-const RoomList = ({ matches = {} }) => (
-    <ul className={style.component}>
-        <li> {JSON.stringify(matches)} </li>
-    {/* {rooms.map(room => {
+class RoomList extends React.Component {
+    componentDidMount() {
+        this.props.handleTalking("jenny")
+    }
+    render() {
+        const { matches, matched, handleClick } = this.props;
         return (
-            <li onClick={e => actions.joinRoom(room)}>
-            </li>
+            <ul className={style.component}>
+                {/* <li> {JSON.stringify(matches)} </li> */}
+                { matched.length === 0 ? (
+                    <li> You got matched with nobody. YIKES </li>
+                ) : (
+                    // <li>{ JSON.stringify(matches) }</li>
+                    Object.entries(matches).map(name => (
+                        <li
+                            onClick={e => handleClick(name[0])}
+                        > {name[0]} 
+                            <col->
+                                <span>{name[1][0].message}</span>
+                            </col->
+                        </li>
+                    ))
+                )}
+            </ul>
         )
-    })} */}
-    </ul>
-);
-
-RoomList.propTypes = {
-    user: PropTypes.string,
-    rooms: "",
-    messages: "",
-    typing: PropTypes.bool
-};
+    }
+}
 
 /** 
  * Looks inside store for messages  
  */
 const mapState = state => {
+    console.log(state.user.data.matches)
     return {
-        matches: state.user.matches
+        matches: state.user.data.matches,
+        matched: state.user.data.matched,
+        talkingTo: state.user.data.talkingTo
     }
 }
 
 const mapDispatch = dispatch => {
     return {
-        handlePopulate(matches) {
-            // dispatch(populateMessages, matches)
+        handleClick(name) {
+            dispatch(changeTalkingto(name))
+        },
+        handleTalking(name) {
+            dispatch(changeTalkingto(name))
         }
     }
 }
