@@ -7,7 +7,7 @@ const CardContent = (item) => {
       Name: {hacker.firstName} {hacker.lastName} <br/>
       Age: {hacker.age} <br/>
       Description: {hacker.description} <br/>
-      Image: <img src={hacker.imageUrl} alt=""></img>
+      
     </div>
   );
 };

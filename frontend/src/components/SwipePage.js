@@ -55,7 +55,6 @@ class SwipePage extends Component {
         
         return (            
             <div>
-                HERE R UR POSSIBLE SWIPEZ <br/>
                 <CardWrapper addEndCard={this.getEndCard.bind(this)}>
                     {cards}
                 </CardWrapper>                    
