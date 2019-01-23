@@ -32,8 +32,8 @@ class MessagePage extends Component {
                     <RoomList matches={{}}/>
                 </aside>
                 <section>
-                    <RoomHeader roomName={"Miguel"}/>
-                    {this.props.talkingTo ? (
+                    <RoomHeader roomName={talkingTo}/>
+                    {talkingTo ? (
                         <row->
                             <col->
                                 <MessageList/>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HackathonsList from '../components/HackathonPage/HackathonsList';
 import '../styles/HackathonPage.scss';
+import { connect } from 'react-redux';
 
 class HackathonPage extends Component {
     constructor(props) {
@@ -64,4 +65,19 @@ class HackathonPage extends Component {
     }
 }
 
-export default HackathonPage;
+const mapState = state => {
+    console.log(state)
+    return {
+        hackathon: state.user.data.hackathons
+    }
+}
+
+const mapDispatch = dispatch => {
+    return {
+        handleHackathon() {
+            dispatch()
+        }
+    }
+}
+
+export default connect(mapState,mapDispatch)(HackathonPage);

@@ -8,6 +8,7 @@ const GET_USER = 'GET_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const POPULATE_MESSAGES = 'POPULATE_MESSAGES';
 const CHANGE_CONVO = 'CHANGE_CONVO';
+const ADD_HACKATHON = 'ADD_HACKATHON';
 
 /**
  * Initial State
@@ -59,6 +60,7 @@ export const getUser = user => ({type: GET_USER, user});
 export const logoutUser = user => ({type: LOGOUT_USER, user});
 export const populateMessages = user => ({type: POPULATE_MESSAGES, user});
 export const changeConvo = user => ({type: CHANGE_CONVO, user});
+export const addHackathon = user => ({type: ADD_HACKATHON, user});
 // export const populateMessages = (peopleArr) => dispatch => {
     // return dispatch()
 // }

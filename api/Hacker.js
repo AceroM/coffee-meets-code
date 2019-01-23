@@ -71,6 +71,8 @@ router.post('/login', async(req, res, next) => {
           hackathons: hacker.hackathons,
           matched: hacker.matched,
           used: hacker.used,
+          matches: {},
+          talkingTo: "Miguel"
         }
       });
     }
