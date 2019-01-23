@@ -71,6 +71,7 @@ const Hacker = db.define("hacker", {
   },
   hackathons: {
     type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: []
   },
   likesMe: {
     type: Sequelize.ARRAY(Sequelize.STRING),
