@@ -96,19 +96,30 @@ router.post('/login', async(req, res, next) => {
  *    Status 404 and a message "error found" if unsuccessful
  */
 router.post('/register', async(req, res, next) => {
-  const { username, password, firstName, lastName, email, githubUrl } = req.body;
+  const { username, password} = req.body;
   const { salt, passHash } = saltHash.saltHashPassword(password);
   let hack_promise = await Hacker.create({
     username: username,
     passHash: passHash,
-    salt: salt,
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    githubUrl: githubUrl
+    salt: salt
   })
-  .then(() => {
-    res.status(201).send("user registered");
+  .then((hacker) => {
+    res.status(201).send({
+      data: {
+        isLoggedIn: true,
+        username: username,
+        firstName: hacker.firstName,
+        lastName: hacker.lastName,
+        email: hacker.email,
+        age: hacker.age,
+        imageUrl: hacker.imageUrl,
+        description: hacker.description,
+        githubUrl: hacker.githubUrl,
+        hackathons: hacker.hackathons,
+        matched: hacker.matched,
+        used: hacker.used,
+      }
+    });
     return;
   }).catch((err) => {
     res.status(404).send("Error found: " + err);
