@@ -32,15 +32,7 @@ const initialUser = {
         username: "",
         password: "",
         error: "",
-        hackathons: [{
-            "endDate": "YYYY-MM-DD",
-            "imageUrl": "...png",
-            "isHighschool": false,
-            "location": "Toronto, ON",
-            "name": "Hack the 6ix 2018",
-            "startDate": "2018-08-24",
-            "url": "http://hackthe6ix.com/"
-        }],
+        hackathons: [],
         githubUrl: "",
         description: "",
         age: 69,
@@ -53,6 +45,7 @@ const initialUser = {
     }
 };
 
+
 /**
  * Action Creators
  */
@@ -64,6 +57,20 @@ export const addHackathon = user => ({type: ADD_HACKATHON, user});
 // export const populateMessages = (peopleArr) => dispatch => {
     // return dispatch()
 // }
+
+export const appendHackathon = (username, name) => async dispatch => {
+    let res;
+    try {
+        res = await axios.post('api/hackers/hackathon/add', {username, hackathonName: name.trim()})
+    } catch (hackErr) {
+        console.error(hackErr)
+    }
+    try {
+        dispatch(addHackathon(res.data))
+    } catch (hackErr) {
+        console.error(hackErr)
+    }
+}
 
 export const auth = (username, password) => async dispatch => {
     let res;
@@ -111,6 +118,7 @@ export const registerUser = (username, password) => async dispatch => {
     }
 }
 
+
 /**
  * REDUCERS
  */
@@ -137,6 +145,12 @@ export default function(state = initialUser, action) {
             data.data.talkingTo=action.user;
             return {
                 ...data,
+            }
+        case ADD_HACKATHON:
+            console.log(data.data)
+            data.data.hackathons=action.user;
+            return {
+                ...data
             }
         default:
             return state
