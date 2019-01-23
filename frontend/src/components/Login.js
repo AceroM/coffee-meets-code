@@ -12,8 +12,18 @@ import Home from './Home'
 import SwipePage from './SwipePage'
 import MessagePage from './Message/MessagePage';
 import HackathonPage from './HackathonPage'
+import socketIOClient from 'socket.io-client';
 
 class Login extends Component {
+    componentDidMount() {
+        const { isLoggedIn, username } = this.props;
+        let hostname = "http://localhost:5000/"; //window.location.hostname; 
+        console.log(hostname)
+        if (isLoggedIn) {
+            const socket = socketIOClient(hostname);
+            socket.emit('user_connect', username); 
+        }
+    }
     render() {
         const { isLoggedIn, username } = this.props;
         return (

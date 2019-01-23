@@ -4,7 +4,7 @@ import Message from './Message/Message';
 import axios from 'axios';
 import { populateMessages } from '../../../store';
 import { connect } from 'react-redux';
-
+import socketIOClient from 'socket.io-client';
 
 /**
  * Message List component
@@ -27,7 +27,11 @@ class MessageList extends React.Component {
 
     }
     render() {
-        const { matches, talkingTo } = this.props;
+        const { matches, talkingTo, firstName } = this.props;
+        // const socket = socketIOClient("localhost:5000");
+        // socket.on('pm'+firstName, (msg, name) => {
+        //     console.log('did I really recieve it though?')
+        // })
         const messages = matches[talkingTo];
         return (
             <ul id="messages" className={style.component}>
@@ -53,6 +57,7 @@ const mapState = state => {
     console.log(state)
     return {
         username: state.user.data.username,
+        firstName: state.user.data.firstName,
         matches: state.user.data.matches,
         talkingTo: state.user.data.talkingTo
     }

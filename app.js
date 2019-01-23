@@ -26,28 +26,28 @@ app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });
 
-const server = app.listen(process.env.PORT || 5000, () => {
+const server = app.listen(5000, () => {
     console.log("App is listening on port 5000");
 });
 
 var io = require('socket.io')(server);
 //Socket
 io.on('connection', function(socket){
-
     //Listen for connection, when one happens:
     socket.on('user_connect', function(name){
-      console.log(name + " connected");
-      io.emit('user_connect', name);
+        console.log(name + " connected");
+        io.emit('user_connect', name);
     });
     //Requires socket.io to be implemented in html
-  
+
     //When someone disconnects:
     socket.on('disconnect', function(){
-      io.emit('disconnect', socket.name);
+        io.emit('disconnect', socket.name);
     });
-  
+
     //When someone sends a private message:
-    socket.on('pm', function(msg, name, receiver){    
-      io.emit('pm'+receiver, msg, name);
+    socket.on('pm', function(msg, name, receiver, matches){    
+        console.log("A PM HAS BEEN SENT: " + msg + "| from: " + name + "| to: " + receiver)
+        io.emit('pm'+receiver, msg, name, matches);
     });
-  });
+});
