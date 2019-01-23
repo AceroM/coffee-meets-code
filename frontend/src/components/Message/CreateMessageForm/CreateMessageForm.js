@@ -6,7 +6,7 @@ import socketIOClient from 'socket.io-client';
 
 // const CreateMessageForm = (data, person) => {
 const CreateMessageForm = ({imageUrl, username, matches, talkingTo, handleSubmit }) => {
-    const socket = socketIOClient("localhost:5000");
+    const socket = socketIOClient(window.location.hostname);
     return (
         <form
             className={style.component}
