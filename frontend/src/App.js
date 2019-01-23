@@ -9,7 +9,7 @@ import socketIOClient from 'socket.io-client';
 
 class App extends Component {
   componentDidMount(){
-    const socket = socketIOClient("localhost:" + process.env.PORT);
+    const socket = socketIOClient(window.location.hostname);
     socket.emit('user_connect', "Kaizen");
   }
   render() {
