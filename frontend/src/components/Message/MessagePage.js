@@ -21,13 +21,17 @@ class MessagePage extends Component {
     }
        /**
     //In render
-    const socket = socketIOClient("localhost:5000");
-    socket.on('pm'+my_name, (msg, name) => {
-        //add msg and name based on the thing
-        //change state/re-render
-    })
+    
     **/
     componentDidMount() {
+        const { isLoggedIn, username, firstName } = this.props;
+        let hostname = "http://localhost:5000/"; //window.location.hostname; 
+        console.log(hostname)
+        console.log(isLoggedIn)
+        if (isLoggedIn) {
+            const socket = socketIOClient(hostname);
+            socket.emit('user_connect', firstName.toLowerCase()); 
+        }
         const {matches, matched, talkingTo, loadChat} = this.props;
         if ( Object.keys(matches).length == 0) {
             if ( matched.length > 0) {
@@ -97,9 +101,12 @@ class MessagePage extends Component {
 const mapState = state => {
     console.log(state.user.data)
     return {
+        isLoggedIn: state.user.data.isLoggedIn,
         talkingTo: state.user.data.talkingTo,
         matched: state.user.data.matched,
-        matches: state.user.data.matches
+        matches: state.user.data.matches,
+        username: state.user.data.username,
+        firstName: state.user.data.firstName
     }
 }
 
