@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './index.module.scss';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { changeTalkingto } from '../../../store'
 

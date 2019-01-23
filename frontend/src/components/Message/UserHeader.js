@@ -2,9 +2,6 @@ import React from 'react';
 import style from './index.module.scss'
 import { connect } from 'react-redux';
 
-const placeholder =
-    'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-
 const UserHeader = ({ username, firstName, lastName, imageUrl }) => {
     return (
         <header className={style.component}>

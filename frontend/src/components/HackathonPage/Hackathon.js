@@ -1,8 +1,8 @@
 import React from 'react';
-import { Composition, Only } from 'atomic-layout';
+import { Composition } from 'atomic-layout';
 import { Text, Image, Button, Card } from './index';
 import { connect } from 'react-redux';
-import { appendHackathon, addHackathon } from '../../store'
+import { appendHackathon } from '../../store'
 
 const templateMobile = `
 thumbnail

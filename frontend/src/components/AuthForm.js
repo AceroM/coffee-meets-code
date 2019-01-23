@@ -51,7 +51,7 @@ class AuthForm extends React.Component {
 AuthForm.propTypes = {
     username: PropTypes.string,
     handleLogin: PropTypes.func,
-    error: PropTypes.object
+    error: PropTypes.string
 }
 
 const mapState = state => {
