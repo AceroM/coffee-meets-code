@@ -9,6 +9,7 @@ import MessageList from './MessageList/MessageList';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { changeConvo } from '../../store';
+import socketIOClient from 'socket.io-client';
 
 class MessagePage extends Component {
     constructor(props) {
@@ -18,7 +19,14 @@ class MessagePage extends Component {
             matches: {}
         }
     }
-    
+       /**
+    //In render
+    const socket = socketIOClient("localhost:5000");
+    socket.on('pm'+my_name, (msg, name) => {
+        //add msg and name based on the thing
+        //change state/re-render
+    })
+    **/
     componentDidMount() {
         const {matches, matched, talkingTo, loadChat} = this.props;
         if ( Object.keys(matches).length == 0) {

@@ -2,15 +2,11 @@ import React from 'react';
 import style from './index.module.scss'
 import { connect } from 'react-redux';
 import { addMessage } from '../../../store';
-//import socketIOClient from 'socket.io-client';
+import socketIOClient from 'socket.io-client';
 
 // const CreateMessageForm = (data, person) => {
 const CreateMessageForm = ({imageUrl, username, matches, talkingTo, handleSubmit }) => {
-    /**
-    //On Button Click
-    const socket = socketIOClient("localhost:8000");
-    socket.emit('pm', msg, my_name, receiver);
-    **/
+    const socket = socketIOClient("localhost:5000");
     return (
         <form
             className={style.component}
@@ -22,6 +18,7 @@ const CreateMessageForm = ({imageUrl, username, matches, talkingTo, handleSubmit
                 }
                 e.target[0].value = ''
                 handleSubmit(imageUrl, username, talkingTo, matches, message)
+                socket.emit('pm', message, username, talkingTo);
             }}
         >
             {/* <input placeholder="Type a message.." onInput={e => data.isTypingWith(person)}/> */}
