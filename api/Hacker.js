@@ -50,9 +50,10 @@ router.post('/login', async(req, res, next) => {
       username
     }
   });
-  if (!hacker){
+  if (!hacker){ //if you can't find the user
     res.status(404).send("Can't find user " + username);
   }else{
+    //Authenticate by running a verifcation function
     let verified = saltHash.verifyPass(password, hacker.salt, hacker.passHash);
     if(!verified){
       res.status(404).send("Password Incorrect");
@@ -98,12 +99,14 @@ router.post('/login', async(req, res, next) => {
 router.post('/register', async(req, res, next) => {
   const { username, password} = req.body;
   const { salt, passHash } = saltHash.saltHashPassword(password);
+  //I made a lot of default values for this to succeed
   await Hacker.create({
     username: username,
     passHash: passHash,
     salt: salt
   })
   .then((hacker) => {
+    //Send the data back so that the user can be logged in after registration
     res.status(201).send({
       data: {
         isLoggedIn: true,
@@ -165,6 +168,7 @@ router.post('/swipedRight', async(req, res, next) => {
     }).then(hacker2 => {
       /**
        * This is where all of the logic actually is
+       * First step: copy all the arrays
        */
       let response = "Succeeded";
       let likesMe1 = hacker.likesMe;
@@ -173,18 +177,24 @@ router.post('/swipedRight', async(req, res, next) => {
       let likesMe2 = hacker2.likesMe;
       let used2 = hacker2.used;
       let matched2 = hacker2.matched;
+      //If the person I swiped on likes me...
       if(likesMe1.includes(swipedOn)){
+        //Match us, and remove him from my likes me array
         matched1.push(swipedOn);
         matched2.push(user);
         likesMe1.splice(likesMe1.indexOf(swipedOn), 1);
         response = "matched";
       }else{
+        //If the person I liked swiped left on me...
         if(used2.includes(user)){
+          //No one has to no (push the name to my used array)
           used1.push(swipedOn);
         }else{
+          //Let them know I like them (push my name to their lieks me array)
           likesMe2.push(user);
         }
       }
+      //Update the hackers with the new info
       Hacker.update(
         {likesMe: likesMe1, used: used1, matched: matched1},
         {where: {username: user}}
@@ -245,11 +255,15 @@ router.post('/swipedLeft', async(req, res, next) => {
       let likesMe1 = hacker.likesMe;
       let used1 = hacker.used;
       let used2 = hacker2.used;
+      //Push their name into my used
       used1.push(swipedOn);
       if(likesMe1.includes(swipedOn)){
+        //If they like me, then that's a yikes
+        //Push my name into their used array
         likesMe1.splice(likesMe1.indexOf(swipedOn), 1);
         used2.push(user);
       }
+      //Update the new information
       Hacker.update(
         {likesMe: likesMe1, used: used1},
         {where: {username: user}}
@@ -288,8 +302,14 @@ router.get('/allExcept/:username', async (req, res, next) => {
       where: {
         username: req.params.username
       }
-    }).then(huh => {
-      let result = hackers.filter(x => !huh.used.includes(x.username) && !huh.matched.includes(x.username));
+    }).then(me => {
+      //"me" is the one hacker
+      //Filter out all hackers that are in my used and matched arrays
+      let result = hackers.filter(x => {
+        return (!me.used.includes(x.username) 
+             && !me.matched.includes(x.username));
+      });
+      //Send the result straight
       res.status(201).send(result);    
     }).catch(err => console.log(err));    
   }).catch(err => {
