@@ -9,7 +9,8 @@ import socketIOClient from 'socket.io-client';
 
 class App extends Component {
   componentDidMount(){
-    const socket = socketIOClient(window.location.hostname);
+    let hostname = "localhost:5000"; //window.location.hostname; 
+    const socket = socketIOClient(hostname);
     socket.emit('user_connect', "Kaizen");
   }
   render() {
