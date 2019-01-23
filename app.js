@@ -5,9 +5,9 @@ const bodyParser = require("body-parser");
 
 const { db } = require("./models");
 
-app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded());
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
 app.use("/api", require("./api"));
 
@@ -20,6 +20,10 @@ db.authenticate()
     });
 
 db.sync().then(() => console.log("tables created!"));
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+});
 
 app.listen(5000, () => {
     console.log("App is listening on port 5000");
