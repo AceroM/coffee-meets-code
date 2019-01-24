@@ -5,8 +5,11 @@ import { addMessage } from '../../../store';
 import socketIOClient from 'socket.io-client';
 
 // const CreateMessageForm = (data, person) => {
-const CreateMessageForm = ({imageUrl, username, matches, talkingTo, handleSubmit }) => {
+const CreateMessageForm = ({firstName, imageUrl, username, matches, talkingTo, handleSubmit }) => {
     const socket = socketIOClient("localhost:5000");
+    socket.on('pm'+username, (msg, name, matches) => {
+        handleSubmit(imageUrl, name, username, matches, msg)
+    })
     return (
         <form
             className={style.component}
@@ -17,8 +20,10 @@ const CreateMessageForm = ({imageUrl, username, matches, talkingTo, handleSubmit
                     return
                 }
                 e.target[0].value = ''
+                const socket = socketIOClient("localhost:5000");
+                // this emits a pm
+                socket.emit('pm', message, username, talkingTo, matches);
                 handleSubmit(imageUrl, username, talkingTo, matches, message)
-                socket.emit('pm', message, username, talkingTo);
             }}
         >
             {/* <input placeholder="Type a message.." onInput={e => data.isTypingWith(person)}/> */}
@@ -37,6 +42,7 @@ const mapState = state => {
     return {
         imageUrl: state.user.data.imageUrl,
         username: state.user.data.username,
+        firstName: state.user.data.firstName,
         matches: state.user.data.matches,
         talkingTo: state.user.data.talkingTo
     }

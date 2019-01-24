@@ -20,6 +20,7 @@ class SwipePage extends Component {
                     other_hackers: response.data,
                     other_hackers_user: temp
                 });
+                console.log(this.state)
             });
     }
     //The following functions are bound to each card
@@ -27,17 +28,21 @@ class SwipePage extends Component {
         axios.post('api/hackers/swipedLeft', {
             user: this.props.data.username, 
             swipedOn: data.username
-        });
+        })
+        .then(res => console.log(res))
+        .catch(err => console.error(err))
     }
     onSwipeRight(data){
         axios.post('api/hackers/swipedRight', {
             user: this.props.data.username, 
             swipedOn: data.username
-        });
+        })
+        .then(res => console.log(res))
+        .catch(err => console.error(err))
     }
     getEndCard() {
         return(
-          <div>You're out of hackers!</div>
+            <div>You're out of hackers!</div>
         );
     }
     render() {

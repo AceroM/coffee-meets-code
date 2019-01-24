@@ -20,8 +20,8 @@ io.on('connection', function(socket){
   });
 
   //When someone sends a private message:
-  socket.on('pm', function(msg, name, receiver){    
-    io.emit('pm'+receiver, msg, name);
+  socket.on('pm', function(msg, name, matches, receiver){    
+    io.emit('pm'+receiver, msg, name, matches);
   });
 });
 

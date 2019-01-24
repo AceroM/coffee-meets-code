@@ -1,5 +1,13 @@
 const Sequelize = require("sequelize");
-const url = process.env.DATABASE_URL || "postgres://localhost/coffee_meets_code"
-const db = new Sequelize(url);
+module.exports = new Sequelize('coffee_meets_code', process.env.PGUSER, process.env.PGPASSWORD, {
+    host: 'localhost',
+    dialect: 'postgres',
+    operatorsAliases: false,
 
-module.exports = db;
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+}) 
