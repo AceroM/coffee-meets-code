@@ -48,6 +48,8 @@ io.on('connection', function(socket){
     //When someone sends a private message:
     socket.on('pm', function(msg, name, receiver, matches){    
         console.log("A PM HAS BEEN SENT: " + msg + "| from: " + name + "| to: " + receiver)
+        console.log('with payload: ')
+        console.log(matches)
         io.emit('pm'+receiver, msg, name, matches);
     });
 });

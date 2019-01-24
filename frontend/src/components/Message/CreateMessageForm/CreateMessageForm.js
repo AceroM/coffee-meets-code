@@ -8,13 +8,6 @@ import socketIOClient from 'socket.io-client';
 const CreateMessageForm = ({firstName, imageUrl, username, matches, talkingTo, handleSubmit }) => {
     const socket = socketIOClient("localhost:5000");
     socket.on('pm'+username, (msg, name, matches) => {
-        // console.log('username')
-        // console.log(username)
-        // console.log('name')
-        // console.log(name)
-        // console.log('msg')
-        // console.log(msg)
-        // console.log(matches)
         handleSubmit(imageUrl, name, username, matches, msg)
     })
     return (
