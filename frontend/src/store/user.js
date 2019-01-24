@@ -63,16 +63,28 @@ export const addMessage = (fromImageUrl, from, to, matches, message) => dispatch
         imageUrl: fromImageUrl,
         name: from 
     }
+    var newMatches = {};
+    for (let name in matches) {
+        if (name === to) {
+            newMatches[from] = matches[name]
+        } else {
+            newMatches[name] = matches[name]
+        }
+    }
     console.log('msg')
     console.log(msg)
     console.log('matches')
     console.log(matches)
+    console.log('newMatches')
+    console.log(newMatches)
+    console.log('from')
+    console.log(from)
     console.log('to')
     console.log(to)
-    let msgArr = matches[to];
+    let msgArr = newMatches[from];
     msgArr.unshift(msg)
-    matches[to] = msgArr;
-    dispatch(changeConvo(matches))
+    newMatches[from] = msgArr;
+    dispatch(changeConvo(newMatches))
 }
 
 export const appendHackathon = (username, name) => async dispatch => {
