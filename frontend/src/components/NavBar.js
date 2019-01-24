@@ -13,7 +13,7 @@ const NavBar = ({ handleClick, isLoggedIn, username }) => {
             <nav className="main-nav">
             { isLoggedIn ? (
                 <ul className="nav-items">
-                    <Link to="/"> Home </Link>
+                    <Link to="/"> Profile </Link>
                     <Link to="/swipe"> Swipe </Link>
                     <Link to="/messages"> Messages </Link>
                     <Link to="/hackathons"> Hackathons </Link>
