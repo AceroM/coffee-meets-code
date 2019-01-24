@@ -24,6 +24,7 @@ class MessageList extends React.Component {
         super(props);
     }
     componentDidMount(){
+
     }
     render() {
         const { matches, talkingTo, firstName } = this.props;
@@ -31,19 +32,20 @@ class MessageList extends React.Component {
         // socket.on('pm'+firstName, (msg, name) => {
         //     console.log('did I really recieve it though?')
         // })
+        const messages = matches[talkingTo];
         return (
             <ul id="messages" className={style.component}>
                 <wrapper->
-                    { matches ? (
-                        Object.entries(matches).map(message => (
+                    { messages ? (
+                        messages.map(message => (
                             <Message 
-                                name={message[0]}
-                                imageUrl={message[1].imageUrl}
-                                message={message[1].message}
+                                name={message.name}
+                                imageUrl={message.imageUrl}
+                                message={message.message}
                             />
                         ))
                     ) : (
-                        <p> {JSON.stringify(talkingTo)} <br/> {JSON.stringify(matches)}</p>
+                        <p>{JSON.stringify(matches)}</p>
                     )}
                 </wrapper->
             </ul>
