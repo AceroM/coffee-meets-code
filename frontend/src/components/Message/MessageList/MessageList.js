@@ -47,7 +47,7 @@ class MessageList extends React.Component {
                     ) : (
                         <p>{JSON.stringify(matches)}</p>
                     )}
-                </wrapper->>
+                </wrapper->
             </ul>
         );
     }

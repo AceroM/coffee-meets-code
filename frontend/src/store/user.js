@@ -165,6 +165,7 @@ export default function(state = initialUser, action) {
             }
         case CHANGE_CONVO:
             data.data.matches=action.user;
+            console.log(action.user)
             return {
                 ...data
             }

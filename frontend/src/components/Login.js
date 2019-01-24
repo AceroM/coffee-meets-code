@@ -12,18 +12,10 @@ import Home from './Home'
 import SwipePage from './SwipePage'
 import MessagePage from './Message/MessagePage';
 import HackathonPage from './HackathonPage'
-import socketIOClient from 'socket.io-client';
+import bagel from '../static/bagel.png';
 
 class Login extends Component {
-    componentDidMount() {
-        const { isLoggedIn, username } = this.props;
-        let hostname = "http://localhost:5000/"; //window.location.hostname; 
-        console.log(hostname)
-        if (isLoggedIn) {
-            const socket = socketIOClient(hostname);
-            socket.emit('user_connect', username); 
-        }
-    }
+
     render() {
         const { isLoggedIn, username } = this.props;
         return (
@@ -50,6 +42,13 @@ class Login extends Component {
                     </Switch>
                 ) : (
                 <div>
+                <div id="logo2">
+                    <img 
+                    style={{
+                        width: "40%",
+                        height: "40%",
+                    }} src={bagel}/>
+                </div>
                 <h1>Login / Register</h1>
                 <Tabs
                     id="tabs"
