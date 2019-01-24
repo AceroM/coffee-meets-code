@@ -47,6 +47,7 @@ class RegisterCard extends React.Component {
                     <InputLabel htmlFor="firstName"> First Name </InputLabel>
                     <Input name="firstName" type="text"/>
                 </FormControl>
+                <br/>
                 <FormControl>
                     <InputLabel htmlFor="lastName"> Last Name </InputLabel>
                     <Input name="lastName" type="text"/>
