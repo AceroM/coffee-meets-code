@@ -124,10 +124,10 @@ export const auth = (username, password) => async dispatch => {
     }
 }
 
-export const registerUser = (username, password) => async dispatch => {
+export const registerUser = (username, password, firstName, lastName) => async dispatch => {
     let res;
     try {
-        res = await axios.post('api/hackers/register', {username, password});
+        res = await axios.post('api/hackers/register', {username, password, firstName, lastName});
     } catch(authError) {
         console.error(authError)
         return dispatch(logoutUser({

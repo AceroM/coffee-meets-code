@@ -97,11 +97,13 @@ router.post('/login', async(req, res, next) => {
  *    Status 404 and a message "error found" if unsuccessful
  */
 router.post('/register', async(req, res, next) => {
-  const { username, password} = req.body;
+  const { username, password, firstName, lastName} = req.body;
   const { salt, passHash } = saltHash.saltHashPassword(password);
   //I made a lot of default values for this to succeed
   await Hacker.create({
     username: username,
+    firstName: firstName,
+    lastName: lastName,
     passHash: passHash,
     salt: salt
   })

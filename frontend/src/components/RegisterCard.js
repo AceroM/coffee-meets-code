@@ -44,8 +44,12 @@ class RegisterCard extends React.Component {
                 </FormControl>
                 <br/>
                 <FormControl>
-                    <InputLabel htmlFor="name"> Name </InputLabel>
-                    <Input name="name" type="text"/>
+                    <InputLabel htmlFor="firstName"> First Name </InputLabel>
+                    <Input name="firstName" type="text"/>
+                </FormControl>
+                <FormControl>
+                    <InputLabel htmlFor="lastName"> Last Name </InputLabel>
+                    <Input name="lastName" type="text"/>
                 </FormControl>
                 <br/>
                 <br/>
@@ -77,8 +81,10 @@ const mapDispatch = dispatch => {
             e.preventDefault();
             const username = e.target.username.value;
             const password = e.target.password.value;
+            const firstName = e.target.firstName.value;
+            const lastName = e.target.lastName.value;
             // dispatch(getUser({isLoggedIn: true, username }));
-            dispatch(registerUser(username, password));
+            dispatch(registerUser(username, password, firstName, lastName));
         }
     }
 }
