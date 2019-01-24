@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import '../styles/Home.scss';
 
 class Home extends Component {
     constructor(props) {
@@ -11,47 +12,65 @@ class Home extends Component {
     
     render () {
         const age = 21;
-        const description = `This is my 
-                profile's description`;
-        /*  --------------THIS IS USING SEMANTIC UI FROM OUR FIRST PROJECT-----------------
-            -Can use this to display the "hackathon" and "teammates" and "skills" boxes later-
-                <div class="ui vertical stripe quote segment">
-                    <div class="ui equal width stackable internally celled grid">
-                        <div class="center aligned row">
-                            <div class="column">
-                                <h3>Hackathons I'm interested in</h3>
-                                <p>- Miguel Acero</p>
-                            </div>
-                            <div class="column">
-                                <h3>My Teammates</h3>
-                                <p>I GOT NO FRIENDS </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        */
-        // pulling the user information from the store and storing them as variables
-        const { username, imageUrl, email } = this.props;
+        const description = "Web Developer, UI/UX";
+        
+        const { username, firstName, lastName, imageUrl, email, hackathons } = this.props;
+        
+        var hackathonsList = hackathons.map(hackathon => 
+            <div>
+                <span className="hackathon">
+                    { hackathon }
+                </span> &nbsp;
+            </div>
+        );
+
         return (
             <div className="profile">
+                <div class="col">
+                    <div class="col-xs-12 col-sm-8">
+                        <h4> Welcome back to CoffeeMeetsCode, { firstName } </h4>
+                        <p> My Profile </p>
+                        <img src ={ imageUrl } width="200" height="200" alt="Profile picture"></img>
+                        <h2> { firstName } { lastName } </h2>
+                        <p><strong>About: </strong> { description } </p>
+                        <p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
+                        <p><strong>Email: </strong> { email } </p>
+                        <p><strong>Interested Hackathons: </strong> { hackathonsList } </p>
+                        <p><strong>Skills: </strong>
+                            <span class="tags">html5</span> 
+                            <span class="tags">css3</span>
+                            <span class="tags">jquery</span>
+                            <span class="tags">bootstrap3</span>
+                        </p>
+                    </div>
+                </div>
+                <h1> WORK IN PROGRESS </h1>
                 <p> Welcome back to CoffeeMeetsCode, { username } </p>
                 <h2> My Profile </h2>
                 <img src ={imageUrl} width="200" height="200" alt="profile"></img>
                 <h3> { username }, { age } </h3>
                 <h3> { email } </h3>
                 <br></br>
-                <p> { description } </p>
+                <h4> Welcome back to CoffeeMeetsCode, { firstName } </h4>
+                <h3> My Profile </h3>
                 <br></br>
-                <table>
-                    <tr>
-                        <th>Hackathons I'm interested in</th>
-                        <th>My Teammates</th>
-                    </tr>
-                    <tr>
-                        <td>HACK HUNTER</td>
-                        <td>I GOT NO FRIENDS</td>
-                    </tr>
-                </table>
+                <div className="pfp">
+                    <img src ={ imageUrl } width="200" height="200" alt="Profile picture"></img>
+                </div>
+                <h2> { firstName } { lastName } </h2>
+                <p><strong>About: </strong> { description } </p>
+                <p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
+                <p><strong>Email: </strong> { email } </p>
+                <p><strong>Interested Hackathons: </strong> { hackathonsList } </p>
+                <p><strong>Skills: </strong>
+                    <span class="tags">html5</span> &nbsp;
+                    <span class="tags">css3</span> &nbsp;
+                    <span class="tags">javascript</span> &nbsp;
+                    <span class="tags">jquery</span> &nbsp;
+                    <span class="tags">reactJS</span> &nbsp;
+                    <span class="tags">express</span> &nbsp;
+                </p>
+                <br></br>
             </div>
         );
     };
@@ -64,6 +83,8 @@ const mapState = state => {
     console.log(state)
     return {
         username: state.user.data.username,
+        firstName: state.user.data.firstName,
+        lastName: state.user.data.lastName,
         imageUrl: state.user.data.imageUrl,
         email: state.user.data.email,
         hackathons: state.user.data.hackathons,

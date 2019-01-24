@@ -10,10 +10,10 @@ const NavBar = ({ handleClick, isLoggedIn, username }) => {
         <div className="header">
             <img id="logo" src={require('../static/bagel.png')} alt=""/>
             {/* <h1> CoffeeMeetsCode </h1> */}
-            <nav className="mainNav">
+            <nav className="main-nav">
             { isLoggedIn ? (
                 <ul className="nav-items">
-                    <Link to="/"> Home </Link>
+                    <Link to="/"> Profile </Link>
                     <Link to="/swipe"> Swipe </Link>
                     <Link to="/messages"> Messages </Link>
                     <Link to="/hackathons"> Hackathons </Link>

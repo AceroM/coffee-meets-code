@@ -3,7 +3,7 @@ import style from './index.module.scss';
 import Message from './Message/Message';
 import { populateMessages } from '../../../store';
 import { connect } from 'react-redux';
-
+import socketIOClient from 'socket.io-client';
 
 /**
  * Message List component
@@ -11,7 +11,11 @@ import { connect } from 'react-redux';
 
 class MessageList extends React.Component {
     render() {
-        const { matches, talkingTo } = this.props;
+        const { matches, talkingTo, firstName } = this.props;
+        // const socket = socketIOClient("localhost:5000");
+        // socket.on('pm'+firstName, (msg, name) => {
+        //     console.log('did I really recieve it though?')
+        // })
         const messages = matches[talkingTo];
         return (
             <ul id="messages" className={style.component}>
@@ -27,7 +31,7 @@ class MessageList extends React.Component {
                     ) : (
                         <p>{JSON.stringify(matches)}</p>
                     )}
-                </wrapper->>
+                </wrapper->
             </ul>
         );
     }
@@ -37,6 +41,7 @@ const mapState = state => {
     console.log(state)
     return {
         username: state.user.data.username,
+        firstName: state.user.data.firstName,
         matches: state.user.data.matches,
         talkingTo: state.user.data.talkingTo
     }

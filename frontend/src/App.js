@@ -5,14 +5,9 @@ import store from './store';
 import NavBar from './components/NavBar';
 import Login from './components/Login'
 import './styles/App.scss';
-import socketIOClient from 'socket.io-client';
+
 
 class App extends Component {
-  componentDidMount(){
-    let hostname = window.location.hostname; 
-    const socket = socketIOClient(hostname);
-    socket.emit('user_connect', "Kaizen");
-  }
   render() {
     return (
       <Provider store={store}>

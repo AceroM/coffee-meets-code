@@ -12,8 +12,10 @@ import Home from './Home'
 import SwipePage from './SwipePage'
 import MessagePage from './Message/MessagePage';
 import HackathonPage from './HackathonPage'
+import bagel from '../static/bagel.png';
 
 class Login extends Component {
+
     render() {
         const { isLoggedIn, username } = this.props;
         return (
@@ -40,6 +42,13 @@ class Login extends Component {
                     </Switch>
                 ) : (
                 <div>
+                <div id="logo2">
+                    <img 
+                    style={{
+                        width: "40%",
+                        height: "40%",
+                    }} src={bagel}/>
+                </div>
                 <h1>Login / Register</h1>
                 <Tabs
                     id="tabs"

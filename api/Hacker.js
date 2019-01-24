@@ -374,7 +374,7 @@ router.get('/populate', async(req, res, next) => {
         email: "fake@mail.com",
         age: 69,
         hackathons: ["<womxn/hacks>", "CUHackit"],
-        matched: ['jenny', 'kaizen'],
+        matched: ['jenny', 'kai'],
         talkingTo: "jenny"
       },
       {
@@ -392,8 +392,8 @@ router.get('/populate', async(req, res, next) => {
         firstName: "Jenny",
         lastName: "Hunter",
         email: "fake3@mail.com",        
-        talkingTo: "mark",
-        matched: ['mark', 'kaizen']
+        talkingTo: "kai",
+        matched: ['mark', 'kai']
       },
       {
         username: "lucian",

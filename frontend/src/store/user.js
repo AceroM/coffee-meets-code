@@ -63,6 +63,12 @@ export const addMessage = (fromImageUrl, from, to, matches, message) => dispatch
         imageUrl: fromImageUrl,
         name: from 
     }
+    console.log('msg')
+    console.log(msg)
+    console.log('matches')
+    console.log(matches)
+    console.log('to')
+    console.log(to)
     let msgArr = matches[to];
     msgArr.unshift(msg)
     matches[to] = msgArr;
@@ -159,6 +165,7 @@ export default function(state = initialUser, action) {
             }
         case CHANGE_CONVO:
             data.data.matches=action.user;
+            console.log(action.user)
             return {
                 ...data
             }
