@@ -8,7 +8,7 @@ import '../styles/NavBar.scss';
 const NavBar = ({ handleClick, isLoggedIn, username }) => {
     return (
         <div className="header">
-            <img id="logo" src={require('../static/bagel.png')}/>
+            <img id="logo" src={require('../static/bagel.png')} alt=""/>
             {/* <h1> CoffeeMeetsCode </h1> */}
             <nav className="main-nav">
             { isLoggedIn ? (
