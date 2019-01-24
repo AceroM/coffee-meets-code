@@ -44,33 +44,6 @@ class Home extends Component {
                         </p>
                     </div>
                 </div>
-                <h1> WORK IN PROGRESS </h1>
-                <p> Welcome back to CoffeeMeetsCode, { username } </p>
-                <h2> My Profile </h2>
-                <img src ={imageUrl} width="200" height="200" alt="profile"></img>
-                <h3> { username }, { age } </h3>
-                <h3> { email } </h3>
-                <br></br>
-                <h4> Welcome back to CoffeeMeetsCode, { firstName } </h4>
-                <h3> My Profile </h3>
-                <br></br>
-                <div className="pfp">
-                    <img src ={ imageUrl } width="200" height="200" alt="Profile picture"></img>
-                </div>
-                <h2> { firstName } { lastName } </h2>
-                <p><strong>About: </strong> { description } </p>
-                <p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
-                <p><strong>Email: </strong> { email } </p>
-                <p><strong>Interested Hackathons: </strong> { hackathonsList } </p>
-                <p><strong>Skills: </strong>
-                    <span class="tags">html5</span> &nbsp;
-                    <span class="tags">css3</span> &nbsp;
-                    <span class="tags">javascript</span> &nbsp;
-                    <span class="tags">jquery</span> &nbsp;
-                    <span class="tags">reactJS</span> &nbsp;
-                    <span class="tags">express</span> &nbsp;
-                </p>
-                <br></br>
             </div>
         );
     };
