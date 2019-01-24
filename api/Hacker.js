@@ -367,6 +367,7 @@ router.get('/populate', async(req, res, next) => {
     [
       {
         username: "mark",
+        description: "just some generic guy",
         passHash: passHash,
         salt: salt,
         firstName: "Mark",
@@ -378,15 +379,8 @@ router.get('/populate', async(req, res, next) => {
         talkingTo: "jenny"
       },
       {
-        username: "john",
-        passHash: passHash,
-        salt: salt,
-        firstName: "John",
-        lastName: "Hopkin",
-        email: "fake2@mail.com",        
-      },
-      {
         username: "jenny",
+        description: "#GirlsCanCode",
         passHash: passHash,
         salt: salt,
         firstName: "Jenny",
@@ -397,6 +391,7 @@ router.get('/populate', async(req, res, next) => {
       },
       {
         username: "lucian",
+        description: "kaizen chose this name lol",
         passHash: passHash,
         salt: salt,
         firstName: "Lucian",
@@ -405,6 +400,7 @@ router.get('/populate', async(req, res, next) => {
       },
       {
         username: 'kai',
+        description: "kaizennnnnn",
         imageUrl: 'https://avatars0.githubusercontent.com/u/8743619?s=460&v=4',
         passHash: passHash,
         salt: salt,
@@ -415,13 +411,36 @@ router.get('/populate', async(req, res, next) => {
         matched: ['mark', 'jenny']
       },
       {
-        username: 'Miguel5000',
+        username: 'miguel',
         imageUrl: 'https://avatars1.githubusercontent.com/u/21187304?s=460&v=4',
         passHash: passHash,
         salt: salt,
         firstName: "Miguel",
         lastName: "Acero",
         email: "miguelacero528@gmail.com",
+        talkingTo: "",
+        matched: []
+      }, 
+      {
+        username: 'aj',
+        imageUrl: 'https://i.imgur.com/K3HxxZq.jpg',
+        passHash: passHash,
+        salt: salt,
+        firstName: "AJ",
+        lastName: "Lapid",
+        email: "ajlapid@gmail.com",
+        talkingTo: "",
+        matched: []
+      },
+      {
+        username: 'jonrosado',
+        description: 'cool instructor guy',
+        imageUrl: 'https://avatars1.githubusercontent.com/u/26702265?s=460&v=4',
+        passHash: passHash,
+        salt: salt,
+        firstName: "Jon",
+        lastName: "Rosado",
+        email: "jonrosado@gmail.com",
         talkingTo: "",
         matched: []
       }

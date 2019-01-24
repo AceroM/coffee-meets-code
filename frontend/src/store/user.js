@@ -67,6 +67,8 @@ export const addMessage = (fromImageUrl, from, to, matches, message) => dispatch
     console.log(msg)
     console.log('matches')
     console.log(matches)
+    console.log('from')
+    console.log(from)
     console.log('to')
     console.log(to)
     let msgArr = matches[to];

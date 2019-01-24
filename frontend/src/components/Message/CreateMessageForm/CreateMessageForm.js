@@ -1,11 +1,11 @@
 import React from 'react';
 import style from './index.module.scss'
 import { connect } from 'react-redux';
-import { addMessage } from '../../../store';
+import { addMessage, changeTalkingto } from '../../../store';
 import socketIOClient from 'socket.io-client';
 
 // const CreateMessageForm = (data, person) => {
-const CreateMessageForm = ({firstName, imageUrl, username, matches, talkingTo, handleSubmit }) => {
+const CreateMessageForm = ({firstName, imageUrl, username, matches, talkingTo, handleSubmit, handleTalking }) => {
     const socket = socketIOClient("localhost:5000");
     socket.on('pm'+username, (msg, name, matches) => {
         handleSubmit(imageUrl, name, username, matches, msg)
@@ -23,7 +23,8 @@ const CreateMessageForm = ({firstName, imageUrl, username, matches, talkingTo, h
                 const socket = socketIOClient("localhost:5000");
                 // this emits a pm
                 socket.emit('pm', message, username, talkingTo, matches);
-                handleSubmit(imageUrl, username, talkingTo, matches, message)
+                handleSubmit(imageUrl, username, talkingTo, matches, message);
+                handleTalking(talkingTo);
             }}
         >
             {/* <input placeholder="Type a message.." onInput={e => data.isTypingWith(person)}/> */}
@@ -52,6 +53,9 @@ const mapDispatch = dispatch => {
     return {
         handleSubmit(imageUrl, username, talkingTo, matches, message) {
             dispatch(addMessage(imageUrl, username, talkingTo, matches, message))
+        },
+        handleTalking(talkingTo) {
+            dispatch(changeTalkingto(talkingTo))
         }
     }
 }
