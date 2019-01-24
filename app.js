@@ -26,7 +26,7 @@ app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });
 
-const server = app.listen(5000, () => {
+const server = app.listen(process.env.PORT, () => {
     console.log("App is listening on port 5000");
 });
 

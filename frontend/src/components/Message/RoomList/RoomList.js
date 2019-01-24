@@ -20,7 +20,7 @@ class RoomList extends React.Component {
         .then(res => {
             let data = res.data;
             console.log(data)
-            let hostname = "http://localhost:5000/"; //window.location.hostname; 
+            let hostname = window.location.hostname; 
             console.log(hostname)
             if (isLoggedIn) {
                 const socket = socketIOClient(hostname);
