@@ -8,7 +8,7 @@ import socketIOClient from 'socket.io-client';
 const CreateMessageForm = ({firstName, imageUrl, username, matches, talkingTo, handleSubmit }) => {
     const socket = socketIOClient(window.location.hostname);
     socket.on('pm'+username, (msg, name, matches) => {
-        handleSubmit(imageUrl, name, username, matches, msg)
+        handleSubmit(imageUrl, username, name, matches, msg)
     })
     return (
         <form
