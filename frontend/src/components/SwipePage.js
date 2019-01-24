@@ -20,7 +20,6 @@ class SwipePage extends Component {
                     other_hackers: response.data,
                     other_hackers_user: temp
                 });
-                console.log(this.state)
             });
     }
     //The following functions are bound to each card

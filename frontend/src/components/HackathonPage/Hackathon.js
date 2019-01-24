@@ -49,9 +49,6 @@ const Hackathon = ({ name, url, startDate, endDate, location, isHighSchool, imag
           </Heading>
 
           <Actions flex align="flex-end">
-            {/*<Only from="md" marginRight={10}>
-              <Button.Map />
-      </Only>*/}
             { hackathons ? (
               hackathons.filter(m => m.trim().toLowerCase().includes(name.trim().toLowerCase())).length > 0 ? (
               <Button disabled="true" wide>Already Registered</Button>
@@ -79,7 +76,6 @@ const mapDispatch = dispatch => {
   return {
     handleHackathon(username, name) {
       dispatch(appendHackathon(username, name))
-    // dispatch(addHackathon(["asdf"]))
     }
   }
 }

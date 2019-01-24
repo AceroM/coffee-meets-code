@@ -66,7 +66,6 @@ const mapDispatch = dispatch => {
             e.preventDefault();
             const username = e.target.username.value;
             const password = e.target.password.value;
-            // dispatch(getUser({isLoggedIn: true, username }));
             dispatch(auth(username, password));
         }
     }

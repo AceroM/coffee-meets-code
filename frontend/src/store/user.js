@@ -63,12 +63,6 @@ export const addMessage = (fromImageUrl, from, to, matches, message) => dispatch
         imageUrl: fromImageUrl,
         name: from 
     }
-    console.log('msg')
-    console.log(msg)
-    console.log('matches')
-    console.log(matches)
-    console.log('to')
-    console.log(to)
     let msgArr = matches[to];
     msgArr.unshift(msg)
     matches[to] = msgArr;
@@ -135,7 +129,6 @@ export const registerUser = (username, password) => async dispatch => {
     }
 }
 
-
 /**
  * REDUCERS
  */
@@ -144,14 +137,8 @@ export default function(state = initialUser, action) {
     var data = state
     switch(action.type) {
         case GET_USER:
-        console.log(data)
-        console.log({
-            ...data,
-            data: action.user
-        })
             return action.user
         case LOGOUT_USER:
-            console.log(action.user)
             return action.user
         case POPULATE_MESSAGES:
             data.data.matches=action.user;
@@ -165,12 +152,10 @@ export default function(state = initialUser, action) {
             }
         case CHANGE_CONVO:
             data.data.matches=action.user;
-            console.log(action.user)
             return {
                 ...data
             }
         case ADD_HACKATHON:
-            console.log(data.data)
             data.data.hackathons=action.user;
             return {
                 ...data

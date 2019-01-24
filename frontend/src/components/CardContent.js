@@ -24,7 +24,6 @@ const CardContent = (item) => {
       <Header>
         <img src={hacker.imageUrl} alt={hacker.username}/>
         <h2> {hacker.firstName} {hacker.lastName} </h2>
-        {/* <h4> {hacker.age}</h4> */}
         <h4> {hacker.description} </h4>
       </Header>
       <Footer>

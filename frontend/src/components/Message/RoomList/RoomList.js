@@ -19,9 +19,7 @@ class RoomList extends React.Component {
         axios.get(`/api/hackers/matched/${username}`)
         .then(res => {
             let data = res.data;
-            console.log(data)
-            let hostname = window.location.hostname; 
-            console.log(hostname)
+            let hostname = window.location.hostname;
             if (isLoggedIn) {
                 const socket = socketIOClient(hostname);
                 socket.emit('user_connect', firstName.toLowerCase()); 
@@ -31,7 +29,6 @@ class RoomList extends React.Component {
                     let n = name.username;
                     matches[n] = [{name: n, message: "Hi", imageUrl: name.imageUrl}]
                 })
-                console.log(matches)
                 this.setState({ matches })
                 loadChat(matches)
             } else {
@@ -43,7 +40,6 @@ class RoomList extends React.Component {
         const { handleClick } = this.props;
         return (
             <ul className={style.component}>
-                {/* <li> {JSON.stringify(this.state.matches)} </li> */}
                 { Object.keys(this.state.matches).length === 0 ? (
                     <li> You got matched with nobody. YIKES </li>
                 ) : (

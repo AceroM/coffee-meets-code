@@ -63,6 +63,5 @@ const mapState = state => {
         hackathons: state.user.data.hackathons,
     }
 }
-// Home.PropTypes
 
 export default connect(mapState)(Home);

@@ -8,6 +8,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
+
 //Database Code
 app.use("/api", require("./api"));
 
@@ -21,6 +22,7 @@ db.authenticate()
 
 db.sync().then(() => console.log("tables created!"));
 
+
 //Link to the React app
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
@@ -30,8 +32,9 @@ const server = app.listen(process.env.PORT, () => {
     console.log("App is listening on port 5000");
 });
 
-var io = require('socket.io')(server);
+
 //Socket
+var io = require('socket.io')(server);
 io.on('connection', function(socket){
     //Listen for connection, when one happens:
     socket.on('user_connect', function(name){

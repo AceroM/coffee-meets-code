@@ -20,7 +20,6 @@ class Login extends Component {
         const { isLoggedIn, username } = this.props;
         return (
             <div className="login-form">
-                {/* { JSON.stringify(this.props) } */}
                 { isLoggedIn ? (
                     <Switch>
                         <Route 
@@ -52,8 +51,6 @@ class Login extends Component {
                 <h1>Login / Register</h1>
                 <Tabs
                     id="tabs"
-                    // value={this.state.value}
-                    // onChange={this.handleChange}
                     variant="fullWidth"
                     indicatorColor="primary"
                     textColor="primary"
@@ -83,10 +80,6 @@ class Login extends Component {
         );
     }
 }
-
-/**
- * ContaiNER
- */
 
 const mapState = state => {
     console.log(state);

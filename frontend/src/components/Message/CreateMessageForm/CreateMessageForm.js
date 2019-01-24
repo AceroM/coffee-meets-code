@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { addMessage } from '../../../store';
 import socketIOClient from 'socket.io-client';
 
-// const CreateMessageForm = (data, person) => {
 const CreateMessageForm = ({firstName, imageUrl, username, matches, talkingTo, handleSubmit }) => {
     const socket = socketIOClient(window.location.hostname);
     socket.on('pm'+username, (msg, name, matches) => {
@@ -25,7 +24,6 @@ const CreateMessageForm = ({firstName, imageUrl, username, matches, talkingTo, h
                 handleSubmit(imageUrl, username, talkingTo, matches, message)
             }}
         >
-            {/* <input placeholder="Type a message.." onInput={e => data.isTypingWith(person)}/> */}
             <input placeholder="Type a message.."/>
             <button type="submit">
             <svg id="send" viewBox="0 0 24 24">

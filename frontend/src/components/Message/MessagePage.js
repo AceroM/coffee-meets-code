@@ -18,12 +18,6 @@ class MessagePage extends Component {
             lonely: false,
         }
     }
-       /**
-    //In render
-    fetch again to check if matched?
-    **/
-    componentDidMount() {
-    }
     
     render() {
         const { talkingTo } = this.props;
