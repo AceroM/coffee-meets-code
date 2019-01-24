@@ -63,10 +63,18 @@ export const addMessage = (fromImageUrl, from, to, matches, message) => dispatch
         imageUrl: fromImageUrl,
         name: from 
     }
-    let msgArr = matches[to];
+    var newMatches = {};
+    for (let name in matches) {
+        if (name === to) {
+            newMatches[from] = matches[name]
+        } else {
+            newMatches[name] = matches[name]
+        }
+    }
+    let msgArr = newMatches[from];
     msgArr.unshift(msg)
-    matches[to] = msgArr;
-    dispatch(changeConvo(matches))
+    newMatches[from] = msgArr;
+    dispatch(changeConvo(newMatches))
 }
 
 export const appendHackathon = (username, name) => async dispatch => {
@@ -106,10 +114,10 @@ export const auth = (username, password) => async dispatch => {
     }
 }
 
-export const registerUser = (username, password) => async dispatch => {
+export const registerUser = (username, password, firstName, lastName) => async dispatch => {
     let res;
     try {
-        res = await axios.post('api/hackers/register', {username, password});
+        res = await axios.post('api/hackers/register', {username, password, firstName, lastName});
     } catch(authError) {
         console.error(authError)
         return dispatch(logoutUser({
