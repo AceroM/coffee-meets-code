@@ -7,19 +7,19 @@ class SwipePage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            other_hackers: [],
-            other_hackers_user: []
+            other_hackers: []
         };
     }
     componentDidMount(){
         axios.get('api/hackers/allExcept/' + this.props.data.username)
             .then(response => {
+                console.log(response)
                 //Maps data to users
                 let temp = response.data.map(x => x.username);
                 this.setState({
-                    other_hackers: response.data,
-                    other_hackers_user: temp
+                    other_hackers: response.data
                 });
+                console.log(this.state)
             });
     }
     //The following functions are bound to each card
@@ -46,23 +46,19 @@ class SwipePage extends Component {
     }
     render() {
         //Convert the hackers data to an array of cards        
-        let cards = this.state.other_hackers.map(item => {            
-            return(
-                <Card key={item.username} 
-                    data={item} 
-                    onSwipeLeft={this.onSwipeLeft.bind(this)}
-                    onSwipeRight={this.onSwipeRight.bind(this)}>
-                    <CardContent hacker={item}/>
-                </Card>
-            );           
-        });
-        
+        let cards = this.state.other_hackers.map(item => (
+            <Card key={item.username} 
+                data={item} 
+                onSwipeLeft={this.onSwipeLeft.bind(this)}
+                onSwipeRight={this.onSwipeRight.bind(this)}>
+                <CardContent hacker={item}/>
+            </Card>
+        ))
+        console.log(cards);
         return (            
-            <div>
                 <CardWrapper addEndCard={this.getEndCard.bind(this)}>
                     {cards}
                 </CardWrapper>                    
-            </div>
         );
     }
 }
